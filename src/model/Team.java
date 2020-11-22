@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Team {
 	
+	// Relations
 	/*
 	VARIABLES EXTRA, VOY A AGREGAR UNA PARA LOS PLAYERS Y OTRA PARA LOS ASISTENTES. DE ESTA FORMA
 	CUANDO SUPEREN SUS LIMITES, ENVIO UN MENSAJE DE QUE NO ES POSIBLE. LUEGO, HAGO VALIDACIONES
@@ -20,6 +21,8 @@ public class Team {
 	
 	// Debo poder ser capaz de eliminar o agregar cualquiera de los empleados que tenemos aqui
 	
+	// Constructor
+	
 	public Team (String teamName, MainCoach mainCoach) {
 		maxPlayers = 0;
 		maxAssistants = 0;
@@ -28,4 +31,10 @@ public class Team {
 		technicalAssistants = new ArrayList<Assistant>(); // Me tengo que asegurar que no sobrepase el limite
 		this.mainCoach = mainCoach;
 	}
+	
+	// Getters and Setters
+	
+	// Methods
+	
+	// toString method
 }

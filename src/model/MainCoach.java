@@ -1,8 +1,13 @@
 package model;
 
-public class MainCoach extends Coach {
+public class MainCoach extends Coach implements profitable {
+	
+	// Relations 
+	
 	private int managerOfTeams;
 	private int wonChampionships;
+	
+	// Constructor
 	
 	public MainCoach (String name, String id, double salary, String state, int yearsOfExperience, int managerOfTeams, int wonChampionships) {
 		super(name, id, salary, state, yearsOfExperience);
@@ -10,11 +15,44 @@ public class MainCoach extends Coach {
 		this.wonChampionships = wonChampionships;
 	}
 	
+	// Getters and setters
+	
+	public int getManagerOfTeams() {
+		return managerOfTeams;
+	}
+	
+	public void setManagerOfTeams(int managerOfTeams) {
+		this.managerOfTeams = managerOfTeams;
+	}
+	
+	public int getWonChampionships() {
+		return wonChampionships;
+	}
+	
+	public void setChampionships(int wonChampionships) {
+		this.wonChampionships = wonChampionships;
+	}
+	
+	// Inherited methods from profitable interface
+	
 	public double calculateMarketPrice() {
-		return 0;
+		double marketPrice = (salary * 10) + (yearsOfExperience * 100) + (wonChampionships * 50);
+		return marketPrice;
 	}
 	
 	public double calculateStars() {
-		return 0;
+		double stars = 5 + (wonChampionships/10);
+		return stars;
+	}
+	
+	// Overrided methods
+	
+	@Override
+	public String toString() {
+		String out = super.toString() + "Manager of teams: " + managerOfTeams + "\n" +
+		"Won championships: " + wonChampionships + "\n" +
+		"-----------------------------------\n";		
+		
+		return out;
 	}
 }
