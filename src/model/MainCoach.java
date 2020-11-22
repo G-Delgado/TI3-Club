@@ -9,4 +9,12 @@ public class MainCoach extends Coach {
 		this.managerOfTeams = managerOfTeams;
 		this.wonChampionships = wonChampionships;
 	}
+	
+	public double calculateMarketPrice() {
+		return 0;
+	}
+	
+	public double calculateStars() {
+		return 0;
+	}
 }

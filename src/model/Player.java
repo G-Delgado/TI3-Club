@@ -1,6 +1,6 @@
 package model;
 
-public class Player extends Employee {
+public class Player extends Employee implements Profitable {
 	private int shirtNumber;
 	private int numberOfGoals;
 	private double averageRating;
@@ -12,5 +12,13 @@ public class Player extends Employee {
 		this.numberOfGoals = numberOfGoals;
 		this.averageRating = averageRating;
 		this.position = Position.valueOf(position);
+	}
+	
+	public double calculateMarketPrice() {
+		return 0;
+	}
+	
+	public double calculateStars() {
+		return 0;
 	}
 }
