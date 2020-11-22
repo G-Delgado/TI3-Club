@@ -39,7 +39,7 @@ public class Alignment {
 	}
 	
 	public void setTactic(String tactic) {
-		this.tactic = tactic;
+		this.tactic = Tactic.valueOf(tactic);
 	}
 	
 	// Overrided methods

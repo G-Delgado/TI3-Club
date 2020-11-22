@@ -58,13 +58,13 @@ public class Player extends Employee implements Profitable {
 	public double calculateMarketPrice() {
 		double marketPrice = 0;
 		if (position == Position.GOALKEEPER) {
-			marketPrice  = (salary * 12) + (averageRating * 150);
+			marketPrice  = (getSalary() * 12) + (averageRating * 150);
 		} else if (position == Position.DEFENDER) {
-			marketPrice  = (salary * 13) + (averageRating * 125) + (numberOfGoals * 100);
+			marketPrice  = (getSalary() * 13) + (averageRating * 125) + (numberOfGoals * 100);
 		} else if (position == Position.MIDFIELD) {
-			marketPrice  = (salary * 14) + (averageRating * 135) + (numberOfGoals * 125);
+			marketPrice  = (getSalary() * 14) + (averageRating * 135) + (numberOfGoals * 125);
 		} else {
-			marketPrice  = (salary * 15) + (averageRating * 145) + (numberOfGoals * 150);
+			marketPrice  = (getSalary() * 15) + (averageRating * 145) + (numberOfGoals * 150);
 		}
 		
 		return marketPrice;

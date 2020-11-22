@@ -1,6 +1,6 @@
 package model;
 
-public class MainCoach extends Coach implements profitable {
+public class MainCoach extends Coach implements Profitable {
 	
 	// Relations 
 	
@@ -36,7 +36,7 @@ public class MainCoach extends Coach implements profitable {
 	// Inherited methods from profitable interface
 	
 	public double calculateMarketPrice() {
-		double marketPrice = (salary * 10) + (yearsOfExperience * 100) + (wonChampionships * 50);
+		double marketPrice = (getSalary() * 10) + (getYearsOfExperience() * 100) + (wonChampionships * 50);
 		return marketPrice;
 	}
 	
