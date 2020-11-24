@@ -25,7 +25,7 @@ public abstract class Coach extends Employee {
 	
 	// Overrided Methods
 	
-	@Override
+	@Override // I need to add to the toString methods the MarketPrice and the Stars
 	public String toString() {
 		String out = super.toString() + "Years of experience: " + yearsOfExperience + "\n";
 		return out;

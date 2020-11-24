@@ -87,7 +87,7 @@ public class Player extends Employee implements Profitable {
 	
 	// Overrided methods
 	
-	@Override
+	@Override // I need to add to the toString methods the MarketPrice and the Stars
 	public String toString() {
 		String out = super.toString() + "Shirt number: " + shirtNumber + "\n" +
 		"Number of goals: " + numberOfGoals + "\n" +
