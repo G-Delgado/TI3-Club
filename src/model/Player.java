@@ -93,6 +93,8 @@ public class Player extends Employee implements Profitable {
 		"Number of goals: " + numberOfGoals + "\n" +
 		"Average rating: " + averageRating + "\n" +
 		"Position: " + position + "\n" +
+		"Market price: " + calculateMarketPrice() + "\n" +
+		"Stars level: " + calculateStars() + "\n" +
 		"-----------------------------------\n";
 		
 		return out;

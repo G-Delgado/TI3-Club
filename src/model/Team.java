@@ -23,18 +23,41 @@ public class Team {
 	
 	// Constructor
 	
-	public Team (String teamName, MainCoach mainCoach) {
+	public Team (String teamName) {
 		maxPlayers = 0;
 		maxAssistants = 0;
 		this.teamName = teamName;
 		players = new ArrayList<Player>(); // Me tengo que asegurar que no sobrepase el limite
 		technicalAssistants = new ArrayList<Assistant>(); // Me tengo que asegurar que no sobrepase el limite
-		this.mainCoach = mainCoach;
+		this.mainCoach = null;
 	}
 	
 	// Getters and Setters
 	
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
+	
+	public MainCoach getMainCoach() {
+		return mainCoach;
+	}
+	
+	public ArrayList<Assistant> getTechnicalAssistants() {
+		return technicalAssistants;
+	}
+	
 	// Methods
 	
-	// toString method
+	// toString methods
+	
+	public String toString() {
+		String mainCoachString = mainCoach != null ? mainCoach.getName() + "\n" : "NULL" + "\n";
+		String out = "-----------------------------------\n" +
+		"Team name: " + teamName + "\n" +
+		"Players: " + players.toString() + "\n" +
+		"Main coach: " + mainCoachString +
+		"Technical assistants: " + technicalAssistants.toString() + "\n";
+		
+		return out;
+	}
 }

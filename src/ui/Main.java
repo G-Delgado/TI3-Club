@@ -8,6 +8,7 @@ public class Main {
 	private Club sapeClub;
 	
 	public Main() {
+		sapeClub = null;
 		in = new Scanner(System.in);
 	}
 	
@@ -27,19 +28,20 @@ public class Main {
 		"(1) Create club\n" +
 		"(2) Hire employee\n" +
 		"(3) Fire employee\n" +
-		"(4) Add an employee to a team\n" +
-		"(5) Remove an employee from a team\n" +
-		"(6) Update an employee information\n" +
-		"(7) Show employees information\n" +
-		"(8) Show teams information\n" +
-		"(9) Add alignment to a team\n" +
-		"(10) Move coach to an office\n" +
-		"(11) Move player to a dressing room\n"+
-		"(12)\n" +
-		"(13)\n" +
-		"(14) Show the club information\n" +
-		"(15) Show coachs location in the office\n" +
-		"(16) Show players location in the dressing rooms\n" +
+		"(4) Create a team\n" + // Prob  I should add delete a team.
+		"(5) Add an employee to a team\n" +
+		"(6) Remove an employee from a team\n" +
+		"(7) Update an employee information\n" +
+		"(8) Show employees information\n" +
+		"(9) Show teams information\n" +
+		"(10) Add alignment to a team\n" +
+		"(11) Move coach to an office\n" +
+		"(12) Move player to a dressing room\n"+
+		"(13) Remove coach from an office\n" +
+		"(14) Remove player from a dressing room\n" +
+		"(15) Show the club information\n" +
+		"(16) Show coachs location in the office\n" +
+		"(17) Show players location in the dressing rooms\n" +
 		"(0) To exit\n");
 		option = in.nextInt();
 		in.nextLine();
@@ -55,10 +57,21 @@ public class Main {
 				hireEmployeeMenu();
 				break;
 			case 3:
+				fireEmployeeMain();
 				break;
 			case 4:
+				createTeam();
 				break;
 			case 5:
+				break;
+			case 6:
+				break;
+			case 7:
+				break;
+			case 8:
+				break;
+			case 9:
+				printTeams();
 				break;
 			case 0:
 				System.out.println("\nExiting...\n");
@@ -82,27 +95,33 @@ public class Main {
 	}
 	
 	public void hireEmployeeMenu() {
-		int opt = 0;
-		do {
-			System.out.println("\nWhat type of employee do you want to hire?\n" +
-			"(1) Main coach\n" +
-			"(2) Assistant coach\n" +
-			"(3) Player\n" +
-			"(0) To exit\n");
-			opt = in.nextInt();
-			in.nextLine();
-			if (opt !=0) {
-				hireEmployeeOperation(opt);
-			}
-		} while (opt !=0);
+		if (sapeClub != null) {
+			int opt = 0;
+			do {
+				System.out.println("\nWhat type of employee do you want to hire?\n" +
+				"(1) Main coach\n" +
+				"(2) Assistant coach\n" +
+				"(3) Player\n" +
+				"(0) To exit\n");
+				opt = in.nextInt();
+				in.nextLine();
+				if (opt !=0) {
+					hireEmployeeOperation(opt);
+				}
+			} while (opt !=0);
+		} else {
+			System.out.println("\n------ You have not created the club yet ------\n");
+		}
+		
 	}
 	
 	public void hireEmployeeOperation(int opt) {
 		int yearsOfExperience = 0;
 		System.out.println("Enter the name of the employee");
 		String name = in.nextLine();
-		System.out.println("Enter his id A#### (Players), E#### (Coachs)");
+		System.out.println("Enter his id J#### (Players), E#### (Coachs)");
 		String id = in.nextLine();
+		id = id.toUpperCase();
 		System.out.println("Enter the salary");
 		double salary = in.nextDouble();
 		in.nextLine();
@@ -147,7 +166,7 @@ public class Main {
 				System.out.println("Enter the average rating of the player");
 				double averageRating = in.nextDouble();
 				in.nextLine();
-				System.out.println("Enter the position of the player. Goalkeeper\nDefender\nMidfield\nStricker");
+				System.out.println("Enter the position of the player. \nGoalkeeper\nDefender\nMidfield\nStricker");
 				String position = in.nextLine();
 				position = position.replaceAll(" ", "").toUpperCase();
 				sapeClub.addEmployee(name, id, salary, state, shirtNumber, numberOfGoals, averageRating, position);
@@ -157,4 +176,31 @@ public class Main {
 				break;
 		}
 	}
+
+	public void fireEmployeeMain() {
+		if (sapeClub != null) {
+			System.out.println("Which is the id of the employee to fire?");
+			String id = in.nextLine();		
+			sapeClub.fireEmployee(id);
+		} else {
+			System.out.println("\nThe club has not been created\n");
+		}
+	}
+	
+	public void createTeam() {
+		System.out.println("Which team do you want it to be, 'A' or 'B'?");
+		String option = in.next();
+		in.nextLine();
+		option = option.toUpperCase();
+		
+		System.out.println("Which is the name of the team?");
+		String teamName = in.nextLine();
+		
+		sapeClub.createTeam(option.charAt(0), teamName);
+	}
+	
+	public void printTeams() { // ESTO NO VA AQUI!
+		System.out.println(sapeClub.teamsToString());
+	}
+
 }
