@@ -63,15 +63,47 @@ public class Main {
 				createTeam();
 				break;
 			case 5:
+				addEmployeeToTeam();
 				break;
 			case 6:
+				removeEmployeeFromTeam();
 				break;
 			case 7:
+				updateEmployee();
 				break;
 			case 8:
+				printEmployees();
 				break;
 			case 9:
 				printTeams();
+				break;
+			case 10:
+				// Add alignment to team
+				break;
+			case 11:
+				// Move coach to an office
+				addToOffice();
+				break;
+			case 12:
+				// Move player to a dressing room
+				addToDressingRoom();
+				break;
+			case 13:
+				// Remove coach from an office
+				break;
+			case 14:
+				// Remove player from a dressing room
+				break;
+			case 15:
+				// Show the club information
+				break;
+			case 16:
+				// Show coaches location in the office
+				showLocationInOffice();
+				break;
+			case 17:
+				// Show players location in the dressing room
+				System.out.println(sapeClub.technichalToString());
 				break;
 			case 0:
 				System.out.println("\nExiting...\n");
@@ -149,9 +181,10 @@ public class Main {
 				sapeClub.addEmployee(name, id, salary, state, yearsOfExperience, managerOfTeams, wonChampionships);
 				break;
 			case 2:
-				System.out.println("Was a player in former years? 'Si o no' ");
-				boolean wasPlayer = in.next().toLowerCase() == "si" ?  true : false;
-				System.out.println("What was his expertise? Ofensive\nDefensive\nController\nLab Plays");
+				System.out.println("Was a player in former years? 'Yes or No' ");
+				boolean wasPlayer = in.next().toLowerCase() == "yes" ?  true : false;
+				in.nextLine();
+				System.out.println("What was his expertise? \nOfensive\nDefensive\nController\nLab Plays\n");
 				String expertise = in.nextLine();
 				expertise = expertise.replaceAll(" ", "").toUpperCase();
 				sapeClub.addEmployee(name, id, salary, state, yearsOfExperience, wasPlayer, expertise);
@@ -166,7 +199,7 @@ public class Main {
 				System.out.println("Enter the average rating of the player");
 				double averageRating = in.nextDouble();
 				in.nextLine();
-				System.out.println("Enter the position of the player. \nGoalkeeper\nDefender\nMidfield\nStricker");
+				System.out.println("Enter the position of the player. \nGoalkeeper\nDefender\nMidfield\nStricker\n");
 				String position = in.nextLine();
 				position = position.replaceAll(" ", "").toUpperCase();
 				sapeClub.addEmployee(name, id, salary, state, shirtNumber, numberOfGoals, averageRating, position);
@@ -199,7 +232,51 @@ public class Main {
 		sapeClub.createTeam(option.charAt(0), teamName);
 	}
 	
-	public void printTeams() { // ESTO NO VA AQUI!
+	public void addEmployeeToTeam() {
+		System.out.println("Enter the id of the employee to add");
+		String id = in.nextLine();
+		System.out.println("Enter the team you are going to add him to: 'A' or 'B'");
+		char team = in.next().charAt(0);
+		
+		sapeClub.addEmpToTeam(id, team);
+	}
+	
+	public void removeEmployeeFromTeam() {
+		System.out.println("Enter the id of the employee");
+		String id = in.nextLine();
+		System.out.println("Enter which team is the employee at:  'A' or 'B'");
+		char team = in.next().charAt(0);
+		
+		sapeClub.removeFromTeam(id, team);
+	}
+	
+	public void updateEmployee() {
+		// Doing this later
+	}
+	
+	public void addToOffice() {
+		System.out.println("Enter the id of the employee");
+		String id = in.nextLine();
+		if (id.charAt(0) == 'E') {
+			sapeClub.addEmpToOffice(id);
+		} else {
+			System.out.println("The ID is incorrect");
+		}
+	}
+	
+	public void showLocationInOffice() {
+		System.out.println(sapeClub.showInOffice());
+	}
+	
+	public void addToDressingRoom() {
+		
+	}
+	
+	public void printEmployees() {
+		System.out.println(sapeClub.employeesToString());
+	}
+	
+	public void printTeams() { 
 		System.out.println(sapeClub.teamsToString());
 	}
 

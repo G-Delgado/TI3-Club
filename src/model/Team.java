@@ -14,6 +14,10 @@ public class Team {
 	/*
 	-------------------------------------------------------------------------------
 	*/
+	
+	/*
+	TAMBIÉN PUEDO HACER QUE JUGADORES Y ASSISTANTS SEA UN ARRAY Y NO UN ARRAYLIST, ASI ME AHORRO EL VALIDAR LOS ESPACIOS
+	*/
 	private String teamName;
 	private ArrayList<Player> players; // Tiene hasta 25
 	private ArrayList<Assistant> technicalAssistants; // Tiene hasta 3
@@ -48,13 +52,97 @@ public class Team {
 	
 	// Methods
 	
-	// toString methods
+	// I need to put the methods to add Employees based on their type
 	
+	public boolean playerIsEmployee(String id) {
+		boolean found = false;
+		for (int i = 0; i < players.size() && !found; i++) {
+			if (id.equals(players.get(i).getId())) {
+				found = true;
+			}
+		}
+		
+		return found;
+	}
+	
+	public boolean coachIsEmployee(String id) {
+		boolean found = false;
+		for (int i = 0; i < technicalAssistants.size() && !found; i++) {
+			if (id.equals(technicalAssistants.get(i).getId())) {
+				found = true;
+			}
+		}
+
+		if (mainCoach.getId().equals(id)) {
+			found = true;
+		}
+		
+		return found;
+		
+	}
+	
+	public void addEmployee(Player player) {
+		if (spaceForPlayers()) {
+			players.add(player);
+		}
+	}
+	
+	public void addEmployee(MainCoach mc) {
+		if (mainCoach == null) {
+			mainCoach = mc;
+		}
+	}
+	
+	public void addEmployee(Assistant as) {
+		if (spaceForAssistants()) {
+			technicalAssistants.add(as);
+		}
+	}
+	
+	public void removeEmployee(String id) {
+		boolean found = false;
+		for (int i = 0; i < players.size() && !found; i++) {
+			if (id.equals(players.get(i).getId())) {
+				players.remove(i);
+				found = true;
+			}
+		}
+		
+		for (int i = 0; i < technicalAssistants.size() && !found; i++) {
+			if (id.equals(technicalAssistants.get(i).getId())) {
+				technicalAssistants.remove(i);
+				found = true;
+			}
+		}
+		
+		if (!found) {
+			mainCoach = null;
+		}
+	}
+	
+	public boolean spaceForPlayers() {
+		boolean thereIsSpace = false;
+		if (maxPlayers < 25) {
+			thereIsSpace = true;
+		}
+		return thereIsSpace;
+	}
+	
+	public boolean spaceForAssistants() {
+		boolean thereIsSpace = false;
+		if (maxAssistants < 3) {
+			thereIsSpace = true;
+		}
+		return thereIsSpace;
+	}
+	
+	// toString methods
+	@Override
 	public String toString() {
 		String mainCoachString = mainCoach != null ? mainCoach.getName() + "\n" : "NULL" + "\n";
 		String out = "-----------------------------------\n" +
 		"Team name: " + teamName + "\n" +
-		"Players: " + players.toString() + "\n" +
+		"Players: " + players.toString() + "\n" + // Talvez no deberia poner toString si no getName
 		"Main coach: " + mainCoachString +
 		"Technical assistants: " + technicalAssistants.toString() + "\n";
 		
