@@ -38,6 +38,14 @@ public class Team {
 	
 	// Getters and Setters
 	
+	public String getTeamName() {
+		return teamName;
+	}
+	
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
+	
 	public ArrayList<Player> getPlayers() {
 		return players;
 	}

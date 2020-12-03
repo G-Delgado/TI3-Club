@@ -69,6 +69,7 @@ public class Main {
 				removeEmployeeFromTeam();
 				break;
 			case 7:
+				// Need to finish this part
 				updateEmployee();
 				break;
 			case 8:
@@ -81,28 +82,27 @@ public class Main {
 				// Add alignment to team
 				break;
 			case 11:
-				// Move coach to an office
 				addToOffice();
 				break;
 			case 12:
-				// Move player to a dressing room
 				addToDressingRoom();
 				break;
 			case 13:
-				// Remove coach from an office
+				// Remove coach from an office --- prob done
+				removeFromOffice();
 				break;
 			case 14:
-				// Remove player from a dressing room
+				// Remove player from a dressing room --- prob done
+				removeFromDr();
 				break;
 			case 15:
 				// Show the club information
+				printClub();
 				break;
 			case 16:
-				// Show coaches location in the office
 				showLocationInOffice();
 				break;
 			case 17:
-				// Show players location in the dressing room
 				System.out.println(sapeClub.technichalToString());
 				break;
 			case 0:
@@ -255,12 +255,23 @@ public class Main {
 	}
 	
 	public void addToOffice() {
-		System.out.println("Enter the id of the employee");
+		System.out.println("Enter the id of the coach");
 		String id = in.nextLine();
 		if (id.charAt(0) == 'E') {
 			sapeClub.addEmpToOffice(id);
 		} else {
-			System.out.println("The ID is incorrect");
+			System.out.println("This id does not belong to any coach");
+		}
+	}
+	
+	public void removeFromOffice() {
+		System.out.println("Enter the id of the coach to remove from the office");
+		String id = in.next();
+		
+		if (id.charAt(0) == 'E') {
+			sapeClub.removeCoachFromOffice(id);
+		} else {
+			System.out.println("The id doest not belong to any coach");
 		}
 	}
 	
@@ -269,7 +280,28 @@ public class Main {
 	}
 	
 	public void addToDressingRoom() {
+		System.out.println("Enter the id of the player");
+		String id = in.nextLine();
+		if (id.charAt(0) == 'J') {
+			sapeClub.addPlayerToDr(id);
+		} else {
+			System.out.println("This id does not belong to any player");
+		}
+	}
+	
+	public void removeFromDr() {
+		System.out.println("Enter the id of the player to remove from the dressing room");
+		String id = in.next();
 		
+		if (id.charAt(0) == 'J') {
+			sapeClub.removePlayerFromDr(id);
+		} else {
+			System.out.println("The id doest not belong to any player");
+		}
+	}
+	
+	public void showLocationInDr() {
+		System.out.println(sapeClub.showInDressingRoom());
 	}
 	
 	public void printEmployees() {
@@ -278,6 +310,10 @@ public class Main {
 	
 	public void printTeams() { 
 		System.out.println(sapeClub.teamsToString());
+	}
+
+	public void printClub() {
+		System.out.println(sapeClub.printClubInfo());
 	}
 
 }

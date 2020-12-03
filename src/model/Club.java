@@ -99,7 +99,7 @@ public class Club {
 		}
 	}
 	
-	public int searchUserByIndex(String id) {
+	public int searchEmployeeById(String id) {
 		int index = 0;
 		boolean found = false;
 		for (int i = 0; i < payroll.size() && !found; i++) {
@@ -126,12 +126,12 @@ public class Club {
 		Player mockPlayer = null;
 		MainCoach mockMc = null;
 		Assistant mockAs = null;
-		if (payroll.get(searchUserByIndex(id)) instanceof Player) {
-			mockPlayer = (Player)payroll.get(searchUserByIndex(id)); 
-		} else if (payroll.get(searchUserByIndex(id)) instanceof MainCoach) {
-			mockMc = (MainCoach)payroll.get(searchUserByIndex(id));
+		if (payroll.get(searchEmployeeById(id)) instanceof Player) {
+			mockPlayer = (Player)payroll.get(searchEmployeeById(id)); 
+		} else if (payroll.get(searchEmployeeById(id)) instanceof MainCoach) {
+			mockMc = (MainCoach)payroll.get(searchEmployeeById(id));
 		} else {
-			mockAs = (Assistant)payroll.get(searchUserByIndex(id));
+			mockAs = (Assistant)payroll.get(searchEmployeeById(id));
 		}
 		switch (team) {
 			case 'A':
@@ -167,7 +167,7 @@ public class Club {
 	}
 	
 	public void addEmpToOffice(String id) { // Necesito validar que aun hayan espacios --------------------------
-		Coach mockEmployee = (Coach)payroll.get(searchUserByIndex(id));
+		Coach mockEmployee = (Coach)payroll.get(searchEmployeeById(id));
 		boolean isNull = false;
 		for (int i = 0; i < officeSector.length && !isNull; i = i + 2) {
 			for (int j = 0; j < officeSector[0].length && !isNull; j = j + 2) {
@@ -179,6 +179,65 @@ public class Club {
 		}
 	}
 	
+	public void removeCoachFromOffice(String id) {
+		boolean found = false;
+		for (int i = 0; i < officeSector.length && !found; i = i+2) {
+			for (int j = 0; j < officeSector[0].length && !found; j = j+2) {
+				if (officeSector[i][j] != null && officeSector[i][j].getId().equals(id)) {
+					officeSector[i][j] = null;
+					found = true;
+				}
+			}
+		}
+	}
+	
+	public void addPlayerToDr(String id) {
+		Player mockPlayer = (Player)payroll.get(searchEmployeeById(id));
+		boolean isNull = false;
+		if (teamA.playerIsEmployee(id)) {
+			for (int i = 0; i < dressingRoomA.length && !isNull; i = i+2) {
+				for (int j = 0; j < dressingRoomA[0].length && !isNull; j = j + 2) {
+					if (dressingRoomA[i][j] == null) {
+						dressingRoomA[i][j] = mockPlayer;
+						isNull = true;
+					}
+				}
+			}
+		} else if (teamB.playerIsEmployee(id)){
+			for (int i = 0; i < dressingRoomB.length && !isNull; i = i+2) {
+				for (int j = 0; j < dressingRoomB[0].length && !isNull; j = j + 2) {
+					if (dressingRoomB[i][j] == null) {
+						dressingRoomB[i][j] = mockPlayer;
+						isNull = true;
+					}
+				}
+			}
+		}
+	}
+	
+	public void removePlayerFromDr(String id) {
+	boolean found = false;
+		if (teamA.playerIsEmployee(id)) {
+			for (int i = 0; i < dressingRoomA.length && !found; i = i+2) {
+				for (int j = 0; j < dressingRoomA[0].length && !found; j = j+2) {
+					if (dressingRoomA[i][j] != null && dressingRoomA[i][j].getId().equals(id)) {
+						dressingRoomA[i][j] = null;
+						found = true;
+					}
+				}
+			}
+		} else if (teamB.playerIsEmployee(id)) {
+			for (int i = 0; i < dressingRoomB.length && !found; i = i+2) {
+				for (int j = 0; j < dressingRoomB[0].length && !found; j = j+2) {
+					if (dressingRoomB[i][j] != null && dressingRoomB[i][j].getId().equals(id)) {
+						dressingRoomB[i][j] = null;
+						found = true;
+					}
+				}
+			}
+		}
+	}
+
 	public String showInOffice() {
 		String out = "";
 		for (int i = 0; i < officeSector.length; i++) {
@@ -193,6 +252,36 @@ public class Club {
 		}
 		
 		return out;
+	}
+	
+	public String showInDressingRoom() {
+		String outA = "";
+		String outB = "";
+		for (int i = 0; i < dressingRoomA.length; i++) {
+			for (int j = 0; j < dressingRoomA[0].length; j++) {
+				if (dressingRoomA[i][j] != null) {
+					outA += dressingRoomA[i][j].getName() + "\t";
+				} else {
+					outA += "Null" + "\t"; 
+				}
+			}
+			
+			outA += "\n";
+		}
+		
+		for (int i = 0; i < dressingRoomB.length; i++) {
+			for (int j = 0; j < dressingRoomB[0].length; j++) {
+				if (dressingRoomB[i][j] != null) {
+					outB += dressingRoomB[i][j].getName() + "\t";
+				} else {
+					outB += "Null" + "\t"; 
+				}
+			}
+			
+			outB += "\n";
+		}
+		
+		return outA + "\n" + outB;
 	}
 	
 	// Overloaded methods 
@@ -225,7 +314,6 @@ public class Club {
 		return out;
 	}
 	
-	
 	public String teamsToString() { 
 		String teamAString = teamA != null ? teamA.toString() + "\n": "";
 		String teamBString = teamB != null ? teamB.toString()  + "\n": "";
@@ -235,6 +323,23 @@ public class Club {
 		if (out.equals("")) {
 			out = "\nNeither of the two teams have been created\n";
 		}
+		return out;
+	}
+	
+	public String printClubInfo() { // Validar cuando estan vacios los array
+		
+		String out = "";
+		out += "\nClub name:\n" + clubName + "\n" +
+		"NIT: " + nit + "\n" +
+		"Foundation date: " + foundationDate + "\n" +
+		"Employees: " + payroll.toString() + "\n" + "Teams: " + "\n";
+		if (teamA != null) {
+			out += teamA.getTeamName() + ", ";
+		}
+		if (teamB != null) {
+			out += teamB.getTeamName() + "\n";
+		}
+		
 		return out;
 	}
 	
