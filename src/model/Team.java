@@ -22,6 +22,7 @@ public class Team {
 	private ArrayList<Player> players; // Tiene hasta 25
 	private ArrayList<Assistant> technicalAssistants; // Tiene hasta 3
 	private MainCoach mainCoach;
+	private ArrayList<Alignment> alignments;
 	
 	// Debo poder ser capaz de eliminar o agregar cualquiera de los empleados que tenemos aqui
 	
@@ -33,6 +34,7 @@ public class Team {
 		this.teamName = teamName;
 		players = new ArrayList<Player>(); // Me tengo que asegurar que no sobrepase el limite
 		technicalAssistants = new ArrayList<Assistant>(); // Me tengo que asegurar que no sobrepase el limite
+		alignments = new ArrayList<Alignment>();
 		this.mainCoach = null;
 	}
 	
@@ -59,8 +61,6 @@ public class Team {
 	}
 	
 	// Methods
-	
-	// I need to put the methods to add Employees based on their type
 	
 	public boolean playerIsEmployee(String id) {
 		boolean found = false;
@@ -142,6 +142,10 @@ public class Team {
 			thereIsSpace = true;
 		}
 		return thereIsSpace;
+	}
+	
+	public void addAlignment(String date, int[][] formation, String tactic) {
+		
 	}
 	
 	// toString methods

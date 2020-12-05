@@ -37,7 +37,7 @@ public class Club {
 	// Getters and Setters
 	
 	// Methods ---------------------------- // Y tambien otro metodo para buscar un empleado y devolver el indice
-	public void fireEmployee(String id) { // Lo podemos cambiar haciendo un metodo para despedir tambien en los equipos
+	public void fireEmployee(String id) { // Lo podemos cambiar haciendo un metodo para despedir tambien en los equipos // WE ARE NOT DELETING THE MAIN COACH YET
 		boolean found = false;
 		for (int i = 0; i < payroll.size() && !found; i++) {
 			if (id.equals(payroll.get(i).getId())) {
@@ -71,7 +71,7 @@ public class Club {
 			if (teamA.getMainCoach() != null && id.equals(teamA.getMainCoach().getId())) {
 				// DELETE THE MAIN COACH;
 			} else if (teamB.getMainCoach() != null && id.equals(teamB.getMainCoach().getId())) {
-				// DELETE THE MAIN COACH;
+				// DELETE THE MAIN COACH;--------------------
 			} else {
 				if (teamA != null) {
 					for (int i = 0; i < teamA.getTechnicalAssistants().size() && !found; i++) {
@@ -103,7 +103,7 @@ public class Club {
 		int index = 0;
 		boolean found = false;
 		for (int i = 0; i < payroll.size() && !found; i++) {
-			if (id == payroll.get(i).getId()) {
+			if (id.equals(payroll.get(i).getId())) {
 				index = i;
 				found = true;
 			}
@@ -121,17 +121,70 @@ public class Club {
 				break;
 		}
 	}
-	
+
+	public void addAlignmentToTeam(char team, String date, String[] formation, String tactic) {
+		// Convert the formation to a matrix
+		int[][] formationMatrix = new int[10][7];
+		
+		for (int i = formationMatrix.length/formation.length; i < formationMatrix.length; i = formationMatrix.length / formation.length){
+			
+			for (int j = formationMatrix[0].length/formation.length; j < formationMatrix[0].length; j++) {
+				formationMatrix[i][j] = 1;
+			}
+		}
+		switch (team) {
+			case 'A':
+				teamA.addAlignment(date, formationMatrix, tactic);
+				break;
+			case 'B':
+				teamB.addAlignment(date, formationMatrix, tactic);
+				break;
+		}
+	}
+
+	public void updateEmployee(String id, int opt) {
+		Employee mockEmployee = payroll.get(searchEmployeeById(id));
+		switch (opt) {
+			case 1:
+				// Name
+				break;
+			case 2:
+				// Salary
+				break;
+			case 3:
+				// State
+				break;
+			case 4:
+				// Won championships (main coach)
+				break;
+			case 5:
+				// Manager of teams (main coach)
+				break;
+			case 6:
+				// Shirt number (player)
+				break;
+			case 7:
+				// Average rating (player)
+				break;
+			case 8:
+				// Position (player)
+				break;
+		}
+	}
+
 	public void addEmpToTeam(String id, char team) { // Este metodo se esta volviendo muy tedioso jummm
 		Player mockPlayer = null;
 		MainCoach mockMc = null;
 		Assistant mockAs = null;
 		if (payroll.get(searchEmployeeById(id)) instanceof Player) {
-			mockPlayer = (Player)payroll.get(searchEmployeeById(id)); 
+			mockPlayer = (Player)payroll.get(searchEmployeeById(id));
+			System.out.println("Llegue aqui!!!: Jugador: \n" + mockPlayer.toString());
 		} else if (payroll.get(searchEmployeeById(id)) instanceof MainCoach) {
 			mockMc = (MainCoach)payroll.get(searchEmployeeById(id));
+			System.out.println("Llegue aqui!!!: Main Coach: \n" + mockMc.toString());
 		} else {
 			mockAs = (Assistant)payroll.get(searchEmployeeById(id));
+			System.out.println("Llegue aqui!!!: Assistant: \n" + mockAs.toString());
 		}
 		switch (team) {
 			case 'A':
@@ -329,7 +382,7 @@ public class Club {
 	public String printClubInfo() { // Validar cuando estan vacios los array
 		
 		String out = "";
-		out += "\nClub name:\n" + clubName + "\n" +
+		out += "\nClub name: " + clubName + "\n" +
 		"NIT: " + nit + "\n" +
 		"Foundation date: " + foundationDate + "\n" +
 		"Employees: " + payroll.toString() + "\n" + "Teams: " + "\n";

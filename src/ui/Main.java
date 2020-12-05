@@ -31,7 +31,7 @@ public class Main {
 		"(4) Create a team\n" + // Prob  I should add delete a team.
 		"(5) Add an employee to a team\n" +
 		"(6) Remove an employee from a team\n" +
-		"(7) Update an employee information\n" +
+		"(7) Update an employee's information\n" +
 		"(8) Show employees information\n" +
 		"(9) Show teams information\n" +
 		"(10) Add alignment to a team\n" +
@@ -79,7 +79,8 @@ public class Main {
 				printTeams();
 				break;
 			case 10:
-				// Add alignment to team
+				//--- prob done
+				addAlignment();
 				break;
 			case 11:
 				addToOffice();
@@ -88,22 +89,21 @@ public class Main {
 				addToDressingRoom();
 				break;
 			case 13:
-				// Remove coach from an office --- prob done
+				//--- prob done
 				removeFromOffice();
 				break;
 			case 14:
-				// Remove player from a dressing room --- prob done
+				//--- prob done
 				removeFromDr();
 				break;
 			case 15:
-				// Show the club information
 				printClub();
 				break;
 			case 16:
 				showLocationInOffice();
 				break;
 			case 17:
-				System.out.println(sapeClub.technichalToString());
+				showLocationInDr();
 				break;
 			case 0:
 				System.out.println("\nExiting...\n");
@@ -184,7 +184,7 @@ public class Main {
 				System.out.println("Was a player in former years? 'Yes or No' ");
 				boolean wasPlayer = in.next().toLowerCase() == "yes" ?  true : false;
 				in.nextLine();
-				System.out.println("What was his expertise? \nOfensive\nDefensive\nController\nLab Plays\n");
+				System.out.println("What was his expertise? \n- Offensive\n- Defensive\n- Controller\n- Lab Plays\n");
 				String expertise = in.nextLine();
 				expertise = expertise.replaceAll(" ", "").toUpperCase();
 				sapeClub.addEmployee(name, id, salary, state, yearsOfExperience, wasPlayer, expertise);
@@ -199,7 +199,7 @@ public class Main {
 				System.out.println("Enter the average rating of the player");
 				double averageRating = in.nextDouble();
 				in.nextLine();
-				System.out.println("Enter the position of the player. \nGoalkeeper\nDefender\nMidfield\nStricker\n");
+				System.out.println("Enter the position of the player. \n- Goalkeeper\n- Defender\n- Midfield\n- Stricker\n");
 				String position = in.nextLine();
 				position = position.replaceAll(" ", "").toUpperCase();
 				sapeClub.addEmployee(name, id, salary, state, shirtNumber, numberOfGoals, averageRating, position);
@@ -250,8 +250,85 @@ public class Main {
 		sapeClub.removeFromTeam(id, team);
 	}
 	
-	public void updateEmployee() {
-		// Doing this later
+	public void updateEmployee() { // I will finish this later
+		int opt = 0;
+		System.out.println("Enter the id of the employee to update its data");
+		String id = in.next();
+		
+		if (id.toUpperCase().charAt(0) == 'E' || id.toUpperCase().charAt(0) == 'J' ) {
+			do {
+				System.out.println("\nWhat do you want to update?\n" + 
+				"(1) Name\n" +
+				"(2) Salary\n" +
+				"(3) State\n" +
+				"(4) Won championships (For main coachs)\n" +
+				"(5) Manager of teams (For main coachs)\n" +
+				"(6) Shirt number (For players)\n" +
+				"(7) Average rating (For players)\n" +
+				"(8) Position (For players)\n" +
+				"(0) To exit\n");
+				
+				opt = in.nextInt();
+				in.nextLine();
+				if (opt != 0) {
+					sapeClub.updateEmployee(id, opt);
+				}
+			} while(opt !=0);
+		} else {
+			System.out.println("This id does not belongs to any employee");
+		}
+	}
+	
+	public void addAlignment() { // Should I also be able to print the formation??
+		
+		System.out.println("Which team do you want to add it to? 'A' or 'B'");
+		char team = in.next().toUpperCase().charAt(0);
+		
+		System.out.println("Enter the date of this alignmnet");
+		String date = in.nextLine();
+		
+		System.out.println("Enter the formation. Ex. 4-4-2\n" + 
+		"0  0	0	0	0	0	0\n" +
+		"0	0	0	0	0	0	0\n" +
+		"0	1	0	0	0	1	0\n" +
+		"0	0	0	0	0	0	0\n" +
+		"0	0	0	0	0	0	0\n" +
+		"0	1	1	0	1	1	0\n" +
+		"0	0	0	0	0	0	0\n" +
+		"0	0	0	0	0	0	0\n" +
+		"0	1	1	0	1	1	0\n" +
+		"0	0	0	0	0	0	0\n" +
+		"\nREMEMBER, THERE ARE ONLY 10 PLAYERS IN THE FORMATION AS THE GOALKEEPER IS NOT BEING COUNTED.\n" +
+		"So you can do 4-2-2-2, but can not do 4-5-8-1. As the summatory of these numbers surpasses 10");
+		
+		String formation = in.nextLine();
+		
+		System.out.println("Enter the tactic of the alignmnet\n" +
+		"Possesive\n" +
+		"Counter attack\n" +
+		"High pressure\n" +
+		"Default");
+		
+		String tactic = in.nextLine();
+		tactic = tactic.replaceAll(" ","").toUpperCase();
+		
+		int sum = 0;
+		String[] formationNums = formation.split("-");
+		for (int i = 0; i < formationNums.length; i++) {
+			sum += Integer.parseInt(formationNums[i]);
+		}
+		
+		if (sum > 10) {
+			System.out.println("The formation surpasses the 10 players");
+		} else if (sum > 0 && sum <= 10) {
+			if (team == 'A' || team == 'B') {
+				sapeClub.addAlignmentToTeam(team, date, formationNums, tactic);
+			} else {
+				System.out.println("The entered team is not valid");
+			}
+		} else {
+			System.out.println("You have introduced a wrong formation");
+		}
 	}
 	
 	public void addToOffice() {

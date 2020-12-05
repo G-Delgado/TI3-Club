@@ -1,7 +1,7 @@
 package model;
 
 public enum Expertise {
-	OFENSIVE,
+	OFFENSIVE,
 	DEFENSIVE,
 	CONTROLLER,
 	LABPLAYS
