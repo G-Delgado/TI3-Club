@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Team {
 	
-	// Relations
+	// --------------------- Atributes and relations --------------------- //
 	/*
 	VARIABLES EXTRA, VOY A AGREGAR UNA PARA LOS PLAYERS Y OTRA PARA LOS ASISTENTES. DE ESTA FORMA
 	CUANDO SUPEREN SUS LIMITES, ENVIO UN MENSAJE DE QUE NO ES POSIBLE. LUEGO, HAGO VALIDACIONES
@@ -24,9 +24,18 @@ public class Team {
 	private MainCoach mainCoach;
 	private ArrayList<Alignment> alignments;
 	
+	// -----------------------------------------------------------------------
+	
 	// Debo poder ser capaz de eliminar o agregar cualquiera de los empleados que tenemos aqui
 	
-	// Constructor
+	// --------------------- Constructor --------------------- //
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public Team (String teamName) {
 		maxPlayers = 0;
@@ -38,7 +47,9 @@ public class Team {
 		this.mainCoach = null;
 	}
 	
-	// Getters and Setters
+	// ----------------------------------------------------------
+	
+	// --------------------- Getters and Setters --------------------- //
 	
 	public String getTeamName() {
 		return teamName;
@@ -60,7 +71,14 @@ public class Team {
 		return technicalAssistants;
 	}
 	
-	// Methods
+	// --------------------- Methods --------------------- //
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public boolean playerIsEmployee(String id) {
 		boolean found = false;
@@ -72,6 +90,13 @@ public class Team {
 		
 		return found;
 	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public boolean coachIsEmployee(String id) {
 		boolean found = false;
@@ -89,11 +114,25 @@ public class Team {
 		
 	}
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public void addEmployee(Player player) {
 		if (spaceForPlayers()) {
 			players.add(player);
 		}
 	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public void addEmployee(MainCoach mc) {
 		if (mainCoach == null) {
@@ -101,11 +140,25 @@ public class Team {
 		}
 	}
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public void addEmployee(Assistant as) {
 		if (spaceForAssistants()) {
 			technicalAssistants.add(as);
 		}
 	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public void removeEmployee(String id) {
 		boolean found = false;
@@ -128,6 +181,13 @@ public class Team {
 		}
 	}
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public boolean spaceForPlayers() {
 		boolean thereIsSpace = false;
 		if (maxPlayers < 25) {
@@ -135,6 +195,13 @@ public class Team {
 		}
 		return thereIsSpace;
 	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public boolean spaceForAssistants() {
 		boolean thereIsSpace = false;
@@ -144,11 +211,26 @@ public class Team {
 		return thereIsSpace;
 	}
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public void addAlignment(String date, int[][] formation, String tactic) {
 		
 	}
 	
-	// toString methods
+	// --------------------- toString methods ----------------- //
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	@Override
 	public String toString() {
 		String mainCoachString = mainCoach != null ? mainCoach.getName() + "\n" : "NULL" + "\n";

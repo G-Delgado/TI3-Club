@@ -2,14 +2,22 @@ package model;
 
 public abstract class Employee {
 	
-	// Relations
+	// -------- Atributes and relations -------- //
 	
 	private String name;
 	private String id;
 	private double salary;
 	private State state;
+	// -------------------------------------------
 	
-	// Constructor
+	// --------------------- Constructor --------------------- //
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public Employee(String name, String id, double salary, String state) {
 		this.name = name;
@@ -18,7 +26,9 @@ public abstract class Employee {
 		this.state = State.valueOf(state);
 	}
 	
-	// Getters and setters --------------------------
+	// ----------------------------------------------------------
+	
+	// --------------------- Getters and setters -------------------------- //
 	public String getName() {
 		return name;
 	}
@@ -51,7 +61,14 @@ public abstract class Employee {
 		this.state = State.valueOf(state);
 	}
 	
-	// Methods --------------------------------------
+	// --------------------- Methods -------------------------------------- //
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	@Override
 	public String toString() {

@@ -2,14 +2,22 @@ package model;
 
 public class Player extends Employee implements Profitable {
 	
-	// Relations
+	// --------------------- Atributes and relations --------------------- //
 	
 	private int shirtNumber;
 	private int numberOfGoals;
 	private double averageRating;
 	private Position position;
+	// ----------------------------------------------------------------------
 	
-	// Constructor
+	// --------------------- Constructor --------------------- //
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public Player (String name, String id, double salary, String state, int shirtNumber, int numberOfGoals, double averageRating, String position) {
 		super(name, id, salary, state);
@@ -19,7 +27,9 @@ public class Player extends Employee implements Profitable {
 		this.position = Position.valueOf(position);
 	}
 	
-	// Getters and setters
+	// -----------------------------------------------------------
+	
+	// --------------------- Getters and setters --------------------- //
 	
 	public int getShirtNumber() {
 		return shirtNumber;
@@ -53,7 +63,14 @@ public class Player extends Employee implements Profitable {
 		this.position = Position.valueOf(position);
 	}
 	
-	// Inherited methods from profitable interface
+	// --------------------- Inherited methods from profitable interface --------------------- //
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public double calculateMarketPrice() {
 		double marketPrice = 0;
@@ -70,6 +87,13 @@ public class Player extends Employee implements Profitable {
 		return marketPrice;
 	}
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public double calculateStars() {
 		double stars = 0;
 		if (position == Position.GOALKEEPER) {
@@ -85,7 +109,14 @@ public class Player extends Employee implements Profitable {
 		return stars;
 	}
 	
-	// Overrided methods
+	// --------------------- Overrided methods --------------------- //
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	@Override // I need to add to the toString methods the MarketPrice and the Stars
 	public String toString() {

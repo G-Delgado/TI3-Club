@@ -2,12 +2,20 @@ package model;
 
 public class Assistant extends Coach {
 	
-	// Relations
+	// --------------------- Atributes and relations --------------------- //
 	
 	private boolean wasPlayer;
 	private Expertise expertise;
+	// ----------------------------------------------------------------------
 	
-	// Constructor
+	// --------------------- Constructor --------------------- //
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public Assistant (String name, String id, double salary, String state, int yearsOfExperience, boolean wasPlayer, String expertise) {
 		super(name, id, salary, state, yearsOfExperience);
@@ -15,7 +23,9 @@ public class Assistant extends Coach {
 		this.expertise = Expertise.valueOf(expertise);
 	}
 	
-	// Getters and Setters
+	// ----------------------------------------------------------
+	
+	// --------------------- Getters and Setters --------------------- //
 	
 	public boolean getWasPlayer() {
 		return wasPlayer;
@@ -33,7 +43,14 @@ public class Assistant extends Coach {
 		this.expertise = Expertise.valueOf(expertise);
 	}
 	
-	// Overrided methods
+	// --------------------- Overrided methods --------------------- //
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	@Override
 	public String toString() {

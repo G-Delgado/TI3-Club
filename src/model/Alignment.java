@@ -2,13 +2,21 @@ package model;
 
 public class Alignment {
 	
-	// Relations
+	// --------------------- Atributes and relations --------------------- //
 	
 	private String date;
 	private int[][] formation;
 	private Tactic tactic;
+	// ----------------------------------------------------------------------
 	
-	// Constructor
+	// --------------------- Constructor --------------------- //
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public Alignment (String date, int[][] formation, String tactic) {
 		this.date = date;
@@ -16,7 +24,9 @@ public class Alignment {
 		this.tactic = Tactic.valueOf(tactic);
 	}
 	
-	// Getters and Setters
+	// ----------------------------------------------------------
+	
+	// --------------------- Getters and Setters --------------------- //
 	
 	public String getDate() {
 		return date;
@@ -42,7 +52,18 @@ public class Alignment {
 		this.tactic = Tactic.valueOf(tactic);
 	}
 	
-	// Overrided methods
+	// --------------------- Overrided methods --------------------- //
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
+	@Override
+	public String toString() { // I need to fill up this part.
+		return  "";
+	}
 	
 }

@@ -4,22 +4,28 @@ import java.util.ArrayList;
 
 public class Club {
 	
-	// Relations
-	
+	// Atributes and relations --------- //
 	private String clubName;
 	private int nit;
 	private String foundationDate;
-	// Teams -------
+	// Teams ------------//
 	private Team teamA;
 	private Team teamB;
-	// Sectors ----------
+	// Sectors ----------//
 	private Coach[][] officeSector;
 	private ArrayList<Employee> payroll;
 	private Player[][] dressingRoomA;
 	private Player[][] dressingRoomB;
-	// ------------------
+	// ---------------------------------//
 	
-	// Constructor
+	// --------------------- Constructor --------------------- //
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public Club(String clubName, int nit, String foundationDate) {
 		this.clubName = clubName;
@@ -34,9 +40,17 @@ public class Club {
 		dressingRoomB = new Player[7][7];
 	}
 	
-	// Getters and Setters
+	// ----------------------------------------------------------
 	
-	// Methods ---------------------------- // Y tambien otro metodo para buscar un empleado y devolver el indice
+	// --------------------- Getters and Setters --------------------- //
+	
+	/*
+		THERE IS THIS FIRE EMPLOEE METHOD THAT I AM PROBABLY GOING TO CHANGE, I DONT LIKE HOW EXTENSE IT IS AND I HAVENT FIXED THE MAIN COACH PART, SO AHA.
+	---------------------------------------------------------------------------------------------
+	SO, WHEN I AM DONE REFACTORING IT, I WILL PUT THE JAVADOC IN IT
+	*/
+	
+	// --------------------- Methods ---------------------------- // Y tambien otro metodo para buscar un empleado y devolver el indice
 	public void fireEmployee(String id) { // Lo podemos cambiar haciendo un metodo para despedir tambien en los equipos // WE ARE NOT DELETING THE MAIN COACH YET
 		boolean found = false;
 		for (int i = 0; i < payroll.size() && !found; i++) {
@@ -99,6 +113,13 @@ public class Club {
 		}
 	}
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public int searchEmployeeById(String id) {
 		int index = 0;
 		boolean found = false;
@@ -111,6 +132,13 @@ public class Club {
 		return index;
 	}
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public void createTeam(char opt, String teamName) {
 		switch (opt) {
 			case 'A':
@@ -122,7 +150,17 @@ public class Club {
 		}
 	}
 
-	public void addAlignmentToTeam(char team, String date, String[] formation, String tactic) {
+	/**
+	*
+	*
+	*
+	*
+	*/
+
+	public String addAlignmentToTeam(char team, String date, String[] formation, String tactic) { // REMEMBER I AM WORKING ON THIS
+		
+		String result = "";
+		
 		// Convert the formation to a matrix
 		int[][] formationMatrix = new int[10][7];
 		
@@ -134,43 +172,32 @@ public class Club {
 		}
 		switch (team) {
 			case 'A':
-				teamA.addAlignment(date, formationMatrix, tactic);
+				if (teamA != null) {
+					teamA.addAlignment(date, formationMatrix, tactic);
+					result = "Alignment succesfully added";
+				} else {
+					result = "Team A has not been created";
+				}
 				break;
 			case 'B':
-				teamB.addAlignment(date, formationMatrix, tactic);
+				if (teamB != null) {
+					teamB.addAlignment(date, formationMatrix, tactic);
+					result = "Alignment succesfully added";
+				} else {
+					result = "Team B has not been created";
+				}
 				break;
 		}
+		
+		return result;
 	}
 
-	public void updateEmployee(String id, int opt) {
-		Employee mockEmployee = payroll.get(searchEmployeeById(id));
-		switch (opt) {
-			case 1:
-				// Name
-				break;
-			case 2:
-				// Salary
-				break;
-			case 3:
-				// State
-				break;
-			case 4:
-				// Won championships (main coach)
-				break;
-			case 5:
-				// Manager of teams (main coach)
-				break;
-			case 6:
-				// Shirt number (player)
-				break;
-			case 7:
-				// Average rating (player)
-				break;
-			case 8:
-				// Position (player)
-				break;
-		}
-	}
+	/**
+	*
+	*
+	*
+	*
+	*/
 
 	public void addEmpToTeam(String id, char team) { // Este metodo se esta volviendo muy tedioso jummm
 		Player mockPlayer = null;
@@ -208,6 +235,13 @@ public class Club {
 		}
 	}
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public void removeFromTeam(String id, char team) {
 		switch (team) {
 			case 'A':
@@ -218,6 +252,13 @@ public class Club {
 				break;
 		}
 	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public void addEmpToOffice(String id) { // Necesito validar que aun hayan espacios --------------------------
 		Coach mockEmployee = (Coach)payroll.get(searchEmployeeById(id));
@@ -232,6 +273,13 @@ public class Club {
 		}
 	}
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public void removeCoachFromOffice(String id) {
 		boolean found = false;
 		for (int i = 0; i < officeSector.length && !found; i = i+2) {
@@ -243,6 +291,13 @@ public class Club {
 			}
 		}
 	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public void addPlayerToDr(String id) {
 		Player mockPlayer = (Player)payroll.get(searchEmployeeById(id));
@@ -268,6 +323,13 @@ public class Club {
 		}
 	}
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public void removePlayerFromDr(String id) {
 	boolean found = false;
 		if (teamA.playerIsEmployee(id)) {
@@ -291,6 +353,13 @@ public class Club {
 		}
 	}
 
+	/**
+	*
+	*
+	*
+	*
+	*/
+
 	public String showInOffice() {
 		String out = "";
 		for (int i = 0; i < officeSector.length; i++) {
@@ -306,6 +375,13 @@ public class Club {
 		
 		return out;
 	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public String showInDressingRoom() {
 		String outA = "";
@@ -337,12 +413,27 @@ public class Club {
 		return outA + "\n" + outB;
 	}
 	
-	// Overloaded methods 
+	// --------------------- Overloaded methods --------------------- //
+
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public void addEmployee(String name, String id, double salary, String state, int yearsOfExperience, int managerOfTeams, int wonChampionships) {
 		MainCoach mcMock = new MainCoach(name, id, salary, state, yearsOfExperience, managerOfTeams, wonChampionships);
 		payroll.add(mcMock);
 		System.out.println(mcMock.toString());
 	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public void addEmployee(String name, String id, double salary, String state, int yearsOfExperience, boolean wasPlayer, String expertise) {
 		Assistant acMock = new Assistant(name, id, salary, state, yearsOfExperience, wasPlayer, expertise);
@@ -350,14 +441,82 @@ public class Club {
 		System.out.println(acMock.toString());
 	}
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public void addEmployee(String name, String id, double salary, String state, int shirtNumber, int numberOfGoals, double averageRating, String position) {
 		Player plMock = new Player(name, id, salary, state, shirtNumber, numberOfGoals, averageRating, position);
 		payroll.add(plMock);
 		System.out.println(plMock.toString());
 	}
-	// ------------------
 	
-	// toString methods
+	/**
+	*
+	*
+	*
+	*
+	*/
+
+	public void updateEmployee(String id, int wonChamp, int manager) {
+		MainCoach mockCoach = (MainCoach)payroll.get(searchEmployeeById(id));
+		if (wonChamp != 0) {
+			mockCoach.setChampionships(wonChamp);
+		} else if (manager != 0) {
+			mockCoach.setManagerOfTeams(manager);
+		}
+	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
+	public void updateEmployee(String id, String name, double salary, String state) {
+		Employee mockEmployee = payroll.get(searchEmployeeById(id));
+		if (name != null) {
+			mockEmployee.setName(name);
+		} else if (salary != 0) {
+			mockEmployee.setSalary(salary);
+		} else if (state != null) {
+			mockEmployee.setState(state);
+		}
+	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
+	public void updateEmployee(String id, int shirtNum, double averageRating, String position) {
+		Player mockPl = (Player)payroll.get(searchEmployeeById(id));
+		if (shirtNum != 0) {
+			mockPl.setShirtNumber(shirtNum);
+		} else if (averageRating != 0) {
+			mockPl.setAverageRating(averageRating);
+		} else if (position != null) {
+			mockPl.setPosition(position);
+		}
+		
+	}
+	
+	// ------------------------------------------------------------------
+	
+	// --------------------- toString methods --------------------- //
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public String employeesToString() {
 		String out = "\n---- Employees ----\n";
@@ -366,6 +525,13 @@ public class Club {
 		}
 		return out;
 	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public String teamsToString() { 
 		String teamAString = teamA != null ? teamA.toString() + "\n": "";
@@ -378,6 +544,13 @@ public class Club {
 		}
 		return out;
 	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public String printClubInfo() { // Validar cuando estan vacios los array
 		
@@ -397,6 +570,14 @@ public class Club {
 	}
 	
 	// To String de prueba ////////////////////
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public String technichalToString() {
 		String out = "";
 		for (Employee as: payroll) {

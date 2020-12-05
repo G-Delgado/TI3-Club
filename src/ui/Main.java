@@ -4,13 +4,21 @@ import java.util.Scanner;
 import model.Club;
 
 public class Main {
+	// -------- Atributes and relations -------- //
 	private Scanner in;
 	private Club sapeClub;
+	// --------------------------------------------
+	
+	// --------------------- Constructor --------------------- //
 	
 	public Main() {
 		sapeClub = null;
 		in = new Scanner(System.in);
 	}
+	
+	// ----------------------------------------------------------
+	
+	// --------------------- Entry of the program --------------------- //
 	
 	public static void main(String args[]) {
 		Main ppal = new Main();
@@ -21,6 +29,17 @@ public class Main {
 		} while (opt != 0);
 		
 	}
+	
+	// -------------------------------------------------------------------
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
+	// --------------------- Methods --------------------- //
 	
 	public int showMenu() {
 		int option = 0;
@@ -48,6 +67,13 @@ public class Main {
 		return option;
 	}
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public void executeOperation(int opt) {
 		switch (opt) {
 			case 1:
@@ -70,7 +96,7 @@ public class Main {
 				break;
 			case 7:
 				// Need to finish this part
-				updateEmployee();
+				updateEmployeeMenu();
 				break;
 			case 8:
 				printEmployees();
@@ -114,6 +140,13 @@ public class Main {
 		}
 	}
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public void createClub() {
 		System.out.println("Enter the name of the club");
 		String name = in.nextLine();
@@ -125,6 +158,13 @@ public class Main {
 		
 		sapeClub = new Club(name, nit, foundationDate);
 	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public void hireEmployeeMenu() {
 		if (sapeClub != null) {
@@ -147,17 +187,24 @@ public class Main {
 		
 	}
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public void hireEmployeeOperation(int opt) {
 		int yearsOfExperience = 0;
 		System.out.println("Enter the name of the employee");
 		String name = in.nextLine();
-		System.out.println("Enter his id J#### (Players), E#### (Coachs)");
+		System.out.println("Enter his id J#### For Players.  E#### or coachs and assistants");
 		String id = in.nextLine();
 		id = id.toUpperCase();
 		System.out.println("Enter the salary");
 		double salary = in.nextDouble();
 		in.nextLine();
-		System.out.println("Enter the state of the employe (Active or Inactive)");
+		System.out.println("Enter the state of the employee (Active or Inactive)");
 		String state = in.nextLine();
 		state = state.replaceAll(" ", "").toUpperCase();
 		
@@ -182,7 +229,7 @@ public class Main {
 				break;
 			case 2:
 				System.out.println("Was a player in former years? 'Yes or No' ");
-				boolean wasPlayer = in.next().toLowerCase() == "yes" ?  true : false;
+				boolean wasPlayer = in.next().toLowerCase().equals("yes") ?  true : false;
 				in.nextLine();
 				System.out.println("What was his expertise? \n- Offensive\n- Defensive\n- Controller\n- Lab Plays\n");
 				String expertise = in.nextLine();
@@ -210,6 +257,13 @@ public class Main {
 		}
 	}
 
+	/**
+	*
+	*
+	*
+	*
+	*/
+
 	public void fireEmployeeMain() {
 		if (sapeClub != null) {
 			System.out.println("Which is the id of the employee to fire?");
@@ -219,6 +273,13 @@ public class Main {
 			System.out.println("\nThe club has not been created\n");
 		}
 	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public void createTeam() {
 		System.out.println("Which team do you want it to be, 'A' or 'B'?");
@@ -232,6 +293,13 @@ public class Main {
 		sapeClub.createTeam(option.charAt(0), teamName);
 	}
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public void addEmployeeToTeam() {
 		System.out.println("Enter the id of the employee to add");
 		String id = in.nextLine();
@@ -240,6 +308,13 @@ public class Main {
 		
 		sapeClub.addEmpToTeam(id, team);
 	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public void removeEmployeeFromTeam() {
 		System.out.println("Enter the id of the employee");
@@ -250,7 +325,14 @@ public class Main {
 		sapeClub.removeFromTeam(id, team);
 	}
 	
-	public void updateEmployee() { // I will finish this later
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
+	public void updateEmployeeMenu() {
 		int opt = 0;
 		System.out.println("Enter the id of the employee to update its data");
 		String id = in.next();
@@ -271,7 +353,7 @@ public class Main {
 				opt = in.nextInt();
 				in.nextLine();
 				if (opt != 0) {
-					sapeClub.updateEmployee(id, opt);
+					updateEmployeeMain(id, opt);
 				}
 			} while(opt !=0);
 		} else {
@@ -279,57 +361,150 @@ public class Main {
 		}
 	}
 	
+	public void updateEmployeeMain(String id, int opt) {
+		switch (opt) {
+			case 1:
+				// Name
+				System.out.println("Enter the new name of the employee");
+				String name = in.nextLine();
+				sapeClub.updateEmployee(id, name, 0, null);
+				break;
+			case 2:
+				// Salary
+				System.out.println("Enter the new salary of the employee");
+				double salary = in.nextDouble();
+				in.nextLine();
+				sapeClub. updateEmployee(id, null, salary, null);
+				break;
+			case 3:
+				// State
+				System.out.println("Enter the state of the employee 'Active' or 'Inactive' ");
+				String state = in.nextLine().replaceAll(" ", "").toUpperCase();
+				sapeClub.updateEmployee(id, null, 0, state);
+				break;
+			case 4:
+				// Won championships (main coach)
+				System.out.println("Enter the amount of won championships of the coach");
+				int wonChamp = in.nextInt();
+				in.nextLine();
+				sapeClub.updateEmployee(id, wonChamp, 0);
+				break;
+			case 5:
+				// Manager of teams (main coach)
+				System.out.println("Enter the amount of teams the coach manages");
+				int manager = in.nextInt();
+				in.nextLine();
+				sapeClub.updateEmployee(id, 0, manager);
+				break;
+			case 6:
+				// Shirt number (player)
+				System.out.println("Enter the shirt number of the player");
+				int shirtNum = in.nextInt();
+				in.nextLine();
+				sapeClub.updateEmployee(id, shirtNum, 0, null);
+				break;
+			case 7:
+				// Average rating (player)
+				System.out.println("Enter the average rating of the player");
+				double averageRating = in.nextDouble();
+				in.nextLine();
+				sapeClub.updateEmployee(id, 0, averageRating, null);
+				break;
+			case 8:
+				// Position (player)
+				System.out.println("Enter the position of the player. \n- Goalkeeper\n- Defender\n- Midfield\n- Stricker\n");
+				String position = in.nextLine().replaceAll(" ", "").toUpperCase();
+				sapeClub.updateEmployee(id, 0, 0, position);
+				break;
+		}
+	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public void addAlignment() { // Should I also be able to print the formation??
 		
-		System.out.println("Which team do you want to add it to? 'A' or 'B'");
-		char team = in.next().toUpperCase().charAt(0);
+		System.out.println("Which team do you want to add it to? 'A' or 'B'");  // There is an error that i cant get to notice
+		char team = in.nextLine().toUpperCase().charAt(0);
 		
-		System.out.println("Enter the date of this alignmnet");
+		System.out.println("Enter the date of this alignment");
 		String date = in.nextLine();
 		
-		System.out.println("Enter the formation. Ex. 4-4-2\n" + 
-		"0  0	0	0	0	0	0\n" +
-		"0	0	0	0	0	0	0\n" +
-		"0	1	0	0	0	1	0\n" +
-		"0	0	0	0	0	0	0\n" +
-		"0	0	0	0	0	0	0\n" +
-		"0	1	1	0	1	1	0\n" +
-		"0	0	0	0	0	0	0\n" +
-		"0	0	0	0	0	0	0\n" +
-		"0	1	1	0	1	1	0\n" +
-		"0	0	0	0	0	0	0\n" +
+		System.out.println("Enter the formation. Example. 4-4-2\n\n" + 
+		"0  0  0  0  0  0  0\n" +
+		"0  0  0  0  0  0  0\n" +
+		"0  1  0  0  0  1  0\n" +
+		"0  0  0  0  0  0  0\n" +
+		"0  0  0  0  0  0  0\n" +
+		"0  1  1  0  1  1  0\n" +
+		"0  0  0  0  0  0  0\n" +
+		"0  0  0  0  0  0  0\n" +
+		"0  1  1  0  1  1  0\n" +
+		"0  0  0  0  0  0  0\n" +
 		"\nREMEMBER, THERE ARE ONLY 10 PLAYERS IN THE FORMATION AS THE GOALKEEPER IS NOT BEING COUNTED.\n" +
 		"So you can do 4-2-2-2, but can not do 4-5-8-1. As the summatory of these numbers surpasses 10");
 		
 		String formation = in.nextLine();
 		
-		System.out.println("Enter the tactic of the alignmnet\n" +
+		System.out.println("Enter the tactic of the alignment\n" +
 		"Possesive\n" +
 		"Counter attack\n" +
 		"High pressure\n" +
-		"Default");
+		"Default\n");
 		
 		String tactic = in.nextLine();
 		tactic = tactic.replaceAll(" ","").toUpperCase();
 		
 		int sum = 0;
+		boolean error = false;
+		String errorMessage = "";
 		String[] formationNums = formation.split("-");
-		for (int i = 0; i < formationNums.length; i++) {
-			sum += Integer.parseInt(formationNums[i]);
-		}
-		
-		if (sum > 10) {
-			System.out.println("The formation surpasses the 10 players");
-		} else if (sum > 0 && sum <= 10) {
-			if (team == 'A' || team == 'B') {
-				sapeClub.addAlignmentToTeam(team, date, formationNums, tactic);
-			} else {
-				System.out.println("The entered team is not valid");
+		if (formationNums.length <= 10) {
+			for (int i = 0; i < formationNums.length && !error; i++) { // TOO MANY CONDITIONALS
+				if (Integer.parseInt(formationNums[i]) <= 7) {
+					sum += Integer.parseInt(formationNums[i]);
+				} else {
+					error = true;
+					errorMessage = "One position of the formation surpasses 7";
+				}
 			}
+			
+			if (sum > 10) {
+			System.out.println("The formation surpasses the 10 players");
+			} else if (sum > 0 && sum <= 10) {
+				if (team == 'A' || team == 'B') {
+					if (sapeClub != null) {
+						sapeClub.addAlignmentToTeam(team, date, formationNums, tactic);
+					} else {
+						errorMessage = "The club has not been created";
+					}
+				} else {
+					System.out.println("The entered team is not valid");
+				}
+			} else {
+				System.out.println("\nYou have introduced a wrong formation");
+			}
+			
 		} else {
-			System.out.println("You have introduced a wrong formation");
+			errorMessage = "There are more than 10 positions";
 		}
+			
+		if (errorMessage != "") {
+			System.out.println("\n" + errorMessage + " !!!\n");
+		}
+			
 	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public void addToOffice() {
 		System.out.println("Enter the id of the coach");
@@ -340,6 +515,13 @@ public class Main {
 			System.out.println("This id does not belong to any coach");
 		}
 	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public void removeFromOffice() {
 		System.out.println("Enter the id of the coach to remove from the office");
@@ -352,9 +534,23 @@ public class Main {
 		}
 	}
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public void showLocationInOffice() {
 		System.out.println(sapeClub.showInOffice());
 	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public void addToDressingRoom() {
 		System.out.println("Enter the id of the player");
@@ -365,6 +561,13 @@ public class Main {
 			System.out.println("This id does not belong to any player");
 		}
 	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public void removeFromDr() {
 		System.out.println("Enter the id of the player to remove from the dressing room");
@@ -377,20 +580,49 @@ public class Main {
 		}
 	}
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public void showLocationInDr() {
 		System.out.println(sapeClub.showInDressingRoom());
 	}
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
 	
 	public void printEmployees() {
 		System.out.println(sapeClub.employeesToString());
 	}
 	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public void printTeams() { 
 		System.out.println(sapeClub.teamsToString());
 	}
-
+	
+	/**
+	*
+	*
+	*
+	*
+	*/
+	
 	public void printClub() {
 		System.out.println(sapeClub.printClubInfo());
 	}
-
+	
+	// -----------------------------------------------------------------------
 }
