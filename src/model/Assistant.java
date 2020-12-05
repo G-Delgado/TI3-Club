@@ -4,8 +4,8 @@ public class Assistant extends Coach {
 	
 	// --------------------- Atributes and relations --------------------- //
 	
-	private boolean wasPlayer;
-	private Expertise expertise;
+	private boolean wasPlayer; // Represents whether the assitant has been a player in the past.
+	private Expertise expertise; // Represents the field of expertise of the assistant. (Offensive, Defensive, Controller, etc.)
 	// ----------------------------------------------------------------------
 	
 	// --------------------- Constructor --------------------- //

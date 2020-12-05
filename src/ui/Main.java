@@ -5,11 +5,17 @@ import model.Club;
 
 public class Main {
 	// -------- Atributes and relations -------- //
-	private Scanner in;
-	private Club sapeClub;
+	private Scanner in; // Scanner used to write information in the console
+	private Club sapeClub; // Club, the management class, which is created when the user desires to.s
 	// --------------------------------------------
 	
 	// --------------------- Constructor --------------------- //
+	
+	/**
+	* Main constructor. Defines the club as null and instantiates the Scanner. <br>
+	* pre: <br>
+	* pos: sapeClub takes the value of null and a scanner is instantiated.<br>
+	*/
 	
 	public Main() {
 		sapeClub = null;
@@ -19,6 +25,13 @@ public class Main {
 	// ----------------------------------------------------------
 	
 	// --------------------- Entry of the program --------------------- //
+	
+	/**
+	* It's the entry of the program.
+	* pre: <br>
+	* pos: <br>
+	*
+	*/
 	
 	public static void main(String args[]) {
 		Main ppal = new Main();
@@ -32,14 +45,15 @@ public class Main {
 	
 	// -------------------------------------------------------------------
 	
+	// --------------------- Methods --------------------- //
+	
 	/**
-	*
-	*
-	*
-	*
+	* Displays the menu with all the available options and asks for the user to choose one. <br>
+	* pre: <br>
+	* pos: <br>
+	* @return option. Number that represents the chosen option.
 	*/
 	
-	// --------------------- Methods --------------------- //
 	
 	public int showMenu() {
 		int option = 0;
@@ -68,10 +82,10 @@ public class Main {
 	}
 	
 	/**
-	*
-	*
-	*
-	*
+	* With the chosen option executes the desired method. <br>
+	* pre: For a method to be called, the opt must be between 1 and 17.<br>
+	* pos: <br>
+	* @param opt. Represents the option chosen that comes from the showMenu method.
 	*/
 	
 	public void executeOperation(int opt) {
@@ -141,29 +155,31 @@ public class Main {
 	}
 	
 	/**
-	*
-	*
-	*
-	*
+	* Asks the user to fill the data of the Club. Name, NIT and Foundation Date and creates a club. <br>
+	* pre: The club must be equals to null<br>
+	* pos: When a club with the data inserted is created, sapeClub will become that Club.<br>
 	*/
 	
 	public void createClub() {
-		System.out.println("Enter the name of the club");
-		String name = in.nextLine();
-		System.out.println("Enter the NIT of the club");
-		int nit = in.nextInt();
-		in.nextLine();
-		System.out.println("Enter its foundation date");
-		String foundationDate = in.nextLine();
-		
-		sapeClub = new Club(name, nit, foundationDate);
+		if (sapeClub == null) {
+			System.out.println("Enter the name of the club");
+			String name = in.nextLine();
+			System.out.println("Enter the NIT of the club");
+			int nit = in.nextInt();
+			in.nextLine();
+			System.out.println("Enter its foundation date");
+			String foundationDate = in.nextLine();
+			
+			sapeClub = new Club(name, nit, foundationDate);
+		} else {
+			System.out.println("The club has been created already");
+		}
 	}
 	
 	/**
-	*
-	*
-	*
-	*
+	* Displays the menu of the possible employees to hire and asks the user to choose one. <br>
+	* pre: <br>
+	* pos: <br>
 	*/
 	
 	public void hireEmployeeMenu() {
@@ -188,10 +204,10 @@ public class Main {
 	}
 	
 	/**
-	*
-	*
-	*
-	*
+	* Asks for the user to fill the data of an employee and then, with the chosen option, to fill either a Main Coach, Assistant or Player data. <br>
+	* pre: opt must be between 1 and 3.<br>
+	* pos: <br>
+	* @param opt. Represents the chosen option that comes from the hireEmployeeMenu method.
 	*/
 	
 	public void hireEmployeeOperation(int opt) {
@@ -258,10 +274,9 @@ public class Main {
 	}
 
 	/**
-	*
-	*
-	*
-	*
+	* Asks for the id of the employee to fire <br>
+	* pre: The club must be defined<br>
+	* pos: <br>
 	*/
 
 	public void fireEmployeeMain() {
@@ -275,353 +290,438 @@ public class Main {
 	}
 	
 	/**
-	*
-	*
-	*
-	*
+	* Asks for the data to create a Team. <br>
+	* pre: The club must be defined. <br>
+	* pos: <br>
 	*/
 	
 	public void createTeam() {
-		System.out.println("Which team do you want it to be, 'A' or 'B'?");
-		String option = in.next();
-		in.nextLine();
-		option = option.toUpperCase();
-		
-		System.out.println("Which is the name of the team?");
-		String teamName = in.nextLine();
-		
-		sapeClub.createTeam(option.charAt(0), teamName);
+		if (sapeClub != null) {
+			System.out.println("Which team do you want it to be, 'A' or 'B'?");
+			String option = in.next();
+			in.nextLine();
+			option = option.toUpperCase();
+			
+			System.out.println("Which is the name of the team?");
+			String teamName = in.nextLine();
+			
+			sapeClub.createTeam(option.charAt(0), teamName);
+		} else {
+			System.out.println("\nThe club has not been created\n");
+		}
 	}
 	
 	/**
-	*
-	*
-	*
-	*
+	* Asks for the id of an employee and adds him to the selected team. <br>
+	* pre: The club must be defined and there should be an employee with the written id.<br>
+	* pos: <br>
 	*/
 	
 	public void addEmployeeToTeam() {
-		System.out.println("Enter the id of the employee to add");
-		String id = in.nextLine();
-		System.out.println("Enter the team you are going to add him to: 'A' or 'B'");
-		char team = in.next().charAt(0);
-		
-		sapeClub.addEmpToTeam(id, team);
+		if (sapeClub != null) {
+			
+			System.out.println("Enter the id of the employee to add");
+			String id = in.nextLine();
+			System.out.println("Enter the team you are going to add him to: 'A' or 'B'");
+			char team = in.next().charAt(0);
+			
+			sapeClub.addEmpToTeam(id, team);
+			
+		} else {
+			System.out.println("\nThe club has not been created\n");
+		}
 	}
 	
 	/**
-	*
-	*
-	*
-	*
+	* Asks for the id of an employee and removes it from the selected team. <br>
+	* pre: The club must be defined and there should be an employee with the written id.<br>
+	* pos: <br>
 	*/
 	
 	public void removeEmployeeFromTeam() {
-		System.out.println("Enter the id of the employee");
-		String id = in.nextLine();
-		System.out.println("Enter which team is the employee at:  'A' or 'B'");
-		char team = in.next().charAt(0);
-		
-		sapeClub.removeFromTeam(id, team);
+		if (sapeClub != null) {
+			System.out.println("Enter the id of the employee");
+			String id = in.nextLine();
+			System.out.println("Enter which team is the employee at:  'A' or 'B'");
+			char team = in.next().charAt(0);
+			
+			sapeClub.removeFromTeam(id, team);
+		} else {
+			System.out.println("\nThe club has not been created\n");
+		}
 	}
 	
 	/**
-	*
-	*
-	*
-	*
+	* Asks for the id of an employee and the atribute to update. <br>
+	* pre: The club must be defined and there should be an employee with the written id.<br>
+	* pos: <br>
 	*/
 	
 	public void updateEmployeeMenu() {
-		int opt = 0;
-		System.out.println("Enter the id of the employee to update its data");
-		String id = in.next();
-		
-		if (id.toUpperCase().charAt(0) == 'E' || id.toUpperCase().charAt(0) == 'J' ) {
-			do {
-				System.out.println("\nWhat do you want to update?\n" + 
-				"(1) Name\n" +
-				"(2) Salary\n" +
-				"(3) State\n" +
-				"(4) Won championships (For main coachs)\n" +
-				"(5) Manager of teams (For main coachs)\n" +
-				"(6) Shirt number (For players)\n" +
-				"(7) Average rating (For players)\n" +
-				"(8) Position (For players)\n" +
-				"(0) To exit\n");
-				
-				opt = in.nextInt();
-				in.nextLine();
-				if (opt != 0) {
-					updateEmployeeMain(id, opt);
-				}
-			} while(opt !=0);
+		if (sapeClub != null) {
+			int opt = 0;
+			System.out.println("Enter the id of the employee to update its data");
+			String id = in.next();
+			
+			if (id.toUpperCase().charAt(0) == 'E' || id.toUpperCase().charAt(0) == 'J' ) {
+				do {
+					System.out.println("\nWhat do you want to update?\n" + 
+					"(1) Name\n" +
+					"(2) Salary\n" +
+					"(3) State\n" +
+					"(4) Won championships (For main coachs)\n" +
+					"(5) Manager of teams (For main coachs)\n" +
+					"(6) Shirt number (For players)\n" +
+					"(7) Average rating (For players)\n" +
+					"(8) Position (For players)\n" +
+					"(0) To exit\n");
+					
+					opt = in.nextInt();
+					in.nextLine();
+					if (opt != 0) {
+						updateEmployeeMain(id, opt);
+					}
+				} while(opt !=0);
+			} else {
+				System.out.println("\nThis id does not belongs to any employee\n");
+			}
 		} else {
-			System.out.println("This id does not belongs to any employee");
-		}
-	}
-	
-	public void updateEmployeeMain(String id, int opt) {
-		switch (opt) {
-			case 1:
-				// Name
-				System.out.println("Enter the new name of the employee");
-				String name = in.nextLine();
-				sapeClub.updateEmployee(id, name, 0, null);
-				break;
-			case 2:
-				// Salary
-				System.out.println("Enter the new salary of the employee");
-				double salary = in.nextDouble();
-				in.nextLine();
-				sapeClub. updateEmployee(id, null, salary, null);
-				break;
-			case 3:
-				// State
-				System.out.println("Enter the state of the employee 'Active' or 'Inactive' ");
-				String state = in.nextLine().replaceAll(" ", "").toUpperCase();
-				sapeClub.updateEmployee(id, null, 0, state);
-				break;
-			case 4:
-				// Won championships (main coach)
-				System.out.println("Enter the amount of won championships of the coach");
-				int wonChamp = in.nextInt();
-				in.nextLine();
-				sapeClub.updateEmployee(id, wonChamp, 0);
-				break;
-			case 5:
-				// Manager of teams (main coach)
-				System.out.println("Enter the amount of teams the coach manages");
-				int manager = in.nextInt();
-				in.nextLine();
-				sapeClub.updateEmployee(id, 0, manager);
-				break;
-			case 6:
-				// Shirt number (player)
-				System.out.println("Enter the shirt number of the player");
-				int shirtNum = in.nextInt();
-				in.nextLine();
-				sapeClub.updateEmployee(id, shirtNum, 0, null);
-				break;
-			case 7:
-				// Average rating (player)
-				System.out.println("Enter the average rating of the player");
-				double averageRating = in.nextDouble();
-				in.nextLine();
-				sapeClub.updateEmployee(id, 0, averageRating, null);
-				break;
-			case 8:
-				// Position (player)
-				System.out.println("Enter the position of the player. \n- Goalkeeper\n- Defender\n- Midfield\n- Stricker\n");
-				String position = in.nextLine().replaceAll(" ", "").toUpperCase();
-				sapeClub.updateEmployee(id, 0, 0, position);
-				break;
+			System.out.println("\nThe club has not been created\n");
 		}
 	}
 	
 	/**
+	* Receives the id and the selected option from the removeEmployeeFromTeam method and updates the selected atribute. <br>
+	* pre: The club must be defined and there shoudl be an employee with the written id.<br>
+	* pos: <br>
+	* @param id. Represents the id of the employee <br>
+	* @param opt. Represents the chosen option to update
+	*/
+	
+	public void updateEmployeeMain(String id, int opt) {
+		if (sapeClub != null) {
+			switch (opt) {
+				case 1:
+					// Name
+					System.out.println("Enter the new name of the employee");
+					String name = in.nextLine();
+					sapeClub.updateEmployee(id, name, 0, null);
+					break;
+				case 2:
+					// Salary
+					System.out.println("Enter the new salary of the employee");
+					double salary = in.nextDouble();
+					in.nextLine();
+					sapeClub. updateEmployee(id, null, salary, null);
+					break;
+				case 3:
+					// State
+					System.out.println("Enter the state of the employee 'Active' or 'Inactive' ");
+					String state = in.nextLine().replaceAll(" ", "").toUpperCase();
+					sapeClub.updateEmployee(id, null, 0, state);
+					break;
+				case 4:
+					// Won championships (main coach)
+					if (id.toUpperCase().charAt(0) == 'E') {
+						System.out.println("Enter the amount of won championships of the coach");
+						int wonChamp = in.nextInt();
+						in.nextLine();
+						sapeClub.updateEmployee(id, wonChamp, -1);
+					} else {
+						System.out.println("This id does not belong to a Main Coach");
+					}
+					break;
+				case 5:
+					// Manager of teams (main coach)
+					if (id.toUpperCase().charAt(0) == 'E') {
+						System.out.println("Enter the amount of teams the coach manages");
+						int manager = in.nextInt();
+						in.nextLine();
+						sapeClub.updateEmployee(id, -1, manager);
+					} else {
+						System.out.println("This id does not belong to a Main Coach");
+					}
+					break;
+				case 6:
+					// Shirt number (player)
+					if (id.toUpperCase().charAt(0) == 'J') {
+						System.out.println("Enter the shirt number of the player");
+						int shirtNum = in.nextInt();
+						in.nextLine();
+						sapeClub.updateEmployee(id, shirtNum, -1, null);
+					} else {
+						System.out.println("This id does not belong to a Player");
+					}
+					
+					break;
+				case 7:
+					// Average rating (player)
+					if (id.toUpperCase().charAt(0) == 'J') {
+						System.out.println("Enter the average rating of the player");
+						double averageRating = in.nextDouble();
+						in.nextLine();
+						sapeClub.updateEmployee(id, -1, averageRating, null);
+					} else {
+						System.out.println("This id does not belong to a Player");
+					}
+					break;
+				case 8:
+					// Position (player)
+					if (id.toUpperCase().charAt(0) == 'J') {
+						System.out.println("Enter the position of the player. \n- Goalkeeper\n- Defender\n- Midfield\n- Stricker\n");
+						String position = in.nextLine().replaceAll(" ", "").toUpperCase();
+						sapeClub.updateEmployee(id, -1, -1, position);
+					} else {
+						System.out.println("This id does not belong to a Player");
+					}
+					break;
+			}
+		} else {
+			System.out.println("\nThe club has not been created\n");
+		}
+	}
+	
+	/**
+	* DOOOOOOOOOOOOOOOOOOINNNNNNNNNNNNNNNNNNGGGGGGGGGGGGGGGGG THISSSSSSSSSSSSSSSSSSS LATEERRRRRRRRRRRRRRRRRRRRRR
 	*
 	*
-	*
-	*
+	*FDEDFDHGFDHFDHMGNESDRJGNERJIKENDRBIKGBENDBFKBGFIKGBDFKGBFDGBDSKGKD
 	*/
 	
 	public void addAlignment() { // Should I also be able to print the formation??
-		
-		System.out.println("Which team do you want to add it to? 'A' or 'B'");  // There is an error that i cant get to notice
-		char team = in.nextLine().toUpperCase().charAt(0);
-		
-		System.out.println("Enter the date of this alignment");
-		String date = in.nextLine();
-		
-		System.out.println("Enter the formation. Example. 4-4-2\n\n" + 
-		"0  0  0  0  0  0  0\n" +
-		"0  0  0  0  0  0  0\n" +
-		"0  1  0  0  0  1  0\n" +
-		"0  0  0  0  0  0  0\n" +
-		"0  0  0  0  0  0  0\n" +
-		"0  1  1  0  1  1  0\n" +
-		"0  0  0  0  0  0  0\n" +
-		"0  0  0  0  0  0  0\n" +
-		"0  1  1  0  1  1  0\n" +
-		"0  0  0  0  0  0  0\n" +
-		"\nREMEMBER, THERE ARE ONLY 10 PLAYERS IN THE FORMATION AS THE GOALKEEPER IS NOT BEING COUNTED.\n" +
-		"So you can do 4-2-2-2, but can not do 4-5-8-1. As the summatory of these numbers surpasses 10");
-		
-		String formation = in.nextLine();
-		
-		System.out.println("Enter the tactic of the alignment\n" +
-		"Possesive\n" +
-		"Counter attack\n" +
-		"High pressure\n" +
-		"Default\n");
-		
-		String tactic = in.nextLine();
-		tactic = tactic.replaceAll(" ","").toUpperCase();
-		
-		int sum = 0;
-		boolean error = false;
-		String errorMessage = "";
-		String[] formationNums = formation.split("-");
-		if (formationNums.length <= 10) {
-			for (int i = 0; i < formationNums.length && !error; i++) { // TOO MANY CONDITIONALS
-				if (Integer.parseInt(formationNums[i]) <= 7) {
-					sum += Integer.parseInt(formationNums[i]);
-				} else {
-					error = true;
-					errorMessage = "One position of the formation surpasses 7";
-				}
-			}
+		if (sapeClub != null) {
+			System.out.println("Which team do you want to add it to? 'A' or 'B'");  // There is an error that i cant get to notice
+			char team = in.nextLine().toUpperCase().charAt(0);
 			
-			if (sum > 10) {
-			System.out.println("The formation surpasses the 10 players");
-			} else if (sum > 0 && sum <= 10) {
-				if (team == 'A' || team == 'B') {
-					if (sapeClub != null) {
-						sapeClub.addAlignmentToTeam(team, date, formationNums, tactic);
+			System.out.println("Enter the date of this alignment");
+			String date = in.nextLine();
+			
+			System.out.println("Enter the formation. Example. 4-4-2\n\n" + 
+			"0  0  0  0  0  0  0\n" +
+			"0  0  0  0  0  0  0\n" +
+			"0  1  0  0  0  1  0\n" +
+			"0  0  0  0  0  0  0\n" +
+			"0  0  0  0  0  0  0\n" +
+			"0  1  1  0  1  1  0\n" +
+			"0  0  0  0  0  0  0\n" +
+			"0  0  0  0  0  0  0\n" +
+			"0  1  1  0  1  1  0\n" +
+			"0  0  0  0  0  0  0\n" +
+			"\nREMEMBER, THERE ARE ONLY 10 PLAYERS IN THE FORMATION AS THE GOALKEEPER IS NOT BEING COUNTED.\n" +
+			"So you can do 4-2-2-2, but can not do 4-5-8-1. As the summatory of these numbers surpasses 10");
+			
+			String formation = in.nextLine();
+			
+			System.out.println("Enter the tactic of the alignment\n" +
+			"Possesive\n" +
+			"Counter attack\n" +
+			"High pressure\n" +
+			"Default\n");
+			
+			String tactic = in.nextLine();
+			tactic = tactic.replaceAll(" ","").toUpperCase();
+			
+			int sum = 0;
+			boolean error = false;
+			String errorMessage = "";
+			String[] formationNums = formation.split("-");
+			if (formationNums.length <= 10) {
+				for (int i = 0; i < formationNums.length && !error; i++) { // TOO MANY CONDITIONALS
+					if (Integer.parseInt(formationNums[i]) <= 7) {
+						sum += Integer.parseInt(formationNums[i]);
 					} else {
-						errorMessage = "The club has not been created";
+						error = true;
+						errorMessage = "One position of the formation surpasses 7";
+					}
+				}
+				
+				if (sum > 10) {
+				System.out.println("The formation surpasses the 10 players");
+				} else if (sum > 0 && sum <= 10) {
+					if (team == 'A' || team == 'B') {
+						if (sapeClub != null) {
+							sapeClub.addAlignmentToTeam(team, date, formationNums, tactic);
+						} else {
+							errorMessage = "The club has not been created";
+						}
+					} else {
+						System.out.println("The entered team is not valid");
 					}
 				} else {
-					System.out.println("The entered team is not valid");
+					System.out.println("\nYou have introduced a wrong formation");
 				}
+				
 			} else {
-				System.out.println("\nYou have introduced a wrong formation");
+				errorMessage = "There are more than 10 positions";
 			}
-			
+				
+			if (errorMessage != "") {
+				System.out.println("\n" + errorMessage + " !!!\n");
+			}
 		} else {
-			errorMessage = "There are more than 10 positions";
+			System.out.println("The club has not been created");
 		}
-			
-		if (errorMessage != "") {
-			System.out.println("\n" + errorMessage + " !!!\n");
-		}
+		
 			
 	}
 	
 	/**
-	*
-	*
-	*
-	*
+	* Asks for the id of the coach and adds him to the Office Sector. <br>
+	* pre: The club must be defined and the id should belong to a coach.<br>
+	* pos: <br>
 	*/
 	
 	public void addToOffice() {
-		System.out.println("Enter the id of the coach");
-		String id = in.nextLine();
-		if (id.charAt(0) == 'E') {
-			sapeClub.addEmpToOffice(id);
+		if (sapeClub != null) {
+			System.out.println("Enter the id of the coach");
+			String id = in.nextLine();
+			if (id.charAt(0) == 'E') {
+				sapeClub.addEmpToOffice(id);
+			} else {
+				System.out.println("This id does not belong to any coach");
+			}
+			
 		} else {
-			System.out.println("This id does not belong to any coach");
+			System.out.println("\nThe club has not been created\n");
 		}
+		
 	}
 	
 	/**
-	*
-	*
-	*
-	*
+	* Asks for the id of the coach and removes him from the Office Sector. <br>
+	* pre: The club must be defined and the id should belong to a coach.<br>
+	* pos: <br>
 	*/
 	
 	public void removeFromOffice() {
-		System.out.println("Enter the id of the coach to remove from the office");
-		String id = in.next();
+		if (sapeClub != null) {
 		
-		if (id.charAt(0) == 'E') {
-			sapeClub.removeCoachFromOffice(id);
+			System.out.println("Enter the id of the coach to remove from the office");
+			String id = in.next();
+			
+			if (id.charAt(0) == 'E') {
+				sapeClub.removeCoachFromOffice(id);
+			} else {
+				System.out.println("The id doest not belong to any coach");
+			}
 		} else {
-			System.out.println("The id doest not belong to any coach");
+			System.out.println("\nThe club has not been created\n");
 		}
+		
 	}
 	
 	/**
-	*
-	*
-	*
-	*
+	* Prints the location of the coaches in the office. <br>
+	* pre: The club must be defined<br>
+	* pos: <br>
 	*/
 	
 	public void showLocationInOffice() {
-		System.out.println(sapeClub.showInOffice());
+		if (sapeClub != null) {
+			System.out.println(sapeClub.showInOffice());
+		} else {
+			System.out.println("\nThe club has not been created\n");
+		}
 	}
 	
 	/**
-	*
-	*
-	*
-	*
+	* Asks for the id of the player and adds him to the Dressing Room. <br>
+	* pre: The club must be defined and the id should belong to a player.<br>
+	* pos: <br>
 	*/
 	
 	public void addToDressingRoom() {
-		System.out.println("Enter the id of the player");
-		String id = in.nextLine();
-		if (id.charAt(0) == 'J') {
-			sapeClub.addPlayerToDr(id);
+		if (sapeClub != null) {
+			System.out.println("Enter the id of the player");
+			String id = in.nextLine();
+			if (id.charAt(0) == 'J') {
+				sapeClub.addPlayerToDr(id);
+			} else {
+				System.out.println("This id does not belong to any player");
+			}
 		} else {
-			System.out.println("This id does not belong to any player");
+			System.out.println("\nThe club has not been created\n");
 		}
 	}
 	
 	/**
-	*
-	*
-	*
-	*
+	* Asks for the id of the player and removes him from the Dressing Room. <br>
+	* pre: The club must be defined and the id should belong to a player.<br>
+	* pos: <br>
 	*/
 	
 	public void removeFromDr() {
-		System.out.println("Enter the id of the player to remove from the dressing room");
-		String id = in.next();
-		
-		if (id.charAt(0) == 'J') {
-			sapeClub.removePlayerFromDr(id);
+		if (sapeClub != null) {
+			System.out.println("Enter the id of the player to remove from the dressing room");
+			String id = in.next();
+			
+			if (id.charAt(0) == 'J') {
+				sapeClub.removePlayerFromDr(id);
+			} else {
+				System.out.println("The id doest not belong to any player");
+			}
 		} else {
-			System.out.println("The id doest not belong to any player");
+			System.out.println("\nThe club has not been created\n");
 		}
 	}
 	
 	/**
-	*
-	*
-	*
-	*
+	* Prints the location of the players in the dressing rooms. <br>
+	* pre: The club must be defined<br>
+	* pos: <br>
 	*/
 	
 	public void showLocationInDr() {
-		System.out.println(sapeClub.showInDressingRoom());
+		if (sapeClub != null) {
+			System.out.println(sapeClub.showInDressingRoom());
+		} else {
+			System.out.println("\nThe club has not been created\n");
+		}
+		
 	}
 	
 	/**
-	*
-	*
-	*
-	*
+	* Prints the employees with their atributes. <br>
+	* pre: The club must be defined. <br>
+	* pos: <br>
 	*/
 	
 	public void printEmployees() {
-		System.out.println(sapeClub.employeesToString());
+		if (sapeClub != null) {
+			System.out.println(sapeClub.employeesToString());
+		} else {
+			System.out.println("\nThe club has not been created\n");
+		}
+		
 	}
 	
 	/**
-	*
-	*
-	*
-	*
+	* Prints the teams with their atributes. <br>
+	* pre: The club must be defined. <br>
+	* pos: <br>
 	*/
 	
 	public void printTeams() { 
-		System.out.println(sapeClub.teamsToString());
+		if (sapeClub != null) {
+			System.out.println(sapeClub.teamsToString());
+		} else {
+			System.out.println("\nThe club has not been created\n");
+		}
 	}
 	
 	/**
-	*
-	*
-	*
+	* Prints the club with their atributes and information. <br>
+	* pre: The club must be defined. <br>
+	* pos: <br>
 	*
 	*/
 	
 	public void printClub() {
-		System.out.println(sapeClub.printClubInfo());
+		if (sapeClub != null) {
+			System.out.println(sapeClub.printClubInfo());
+		} else {
+			System.out.println("\nThe club has not been created\n");
+		}
 	}
 	
 	// -----------------------------------------------------------------------

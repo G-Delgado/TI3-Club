@@ -4,10 +4,10 @@ public class Player extends Employee implements Profitable {
 	
 	// --------------------- Atributes and relations --------------------- //
 	
-	private int shirtNumber;
-	private int numberOfGoals;
-	private double averageRating;
-	private Position position;
+	private int shirtNumber; // Represents the number of the shirt of the player
+	private int numberOfGoals; // Represents the number of goals the player has made so far.
+	private double averageRating; // Represents the average rating of the player
+	private Position position; // Represents the position of the player (Stricker, Midfield, etc.)
 	// ----------------------------------------------------------------------
 	
 	// --------------------- Constructor --------------------- //

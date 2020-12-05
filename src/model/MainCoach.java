@@ -4,8 +4,8 @@ public class MainCoach extends Coach implements Profitable {
 	
 	// --------------------- Atributes and relations --------------------- // 
 	
-	private int managerOfTeams;
-	private int wonChampionships;
+	private int managerOfTeams; // Represents the number of teams the coach manages.
+	private int wonChampionships; // Represents the number of won championships the coach has.
 	// ----------------------------------------------------------------------
 	
 	// --------------------- Constructor --------------------- //

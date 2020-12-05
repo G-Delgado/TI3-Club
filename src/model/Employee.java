@@ -4,10 +4,10 @@ public abstract class Employee {
 	
 	// -------- Atributes and relations -------- //
 	
-	private String name;
-	private String id;
-	private double salary;
-	private State state;
+	private String name; // Represents the name of the employee
+	private String id; // Represents the id of the employee
+	private double salary; // Represents the salary of the employee
+	private State state; // Represents the state of the employee, from active to inactive
 	// -------------------------------------------
 	
 	// --------------------- Constructor --------------------- //

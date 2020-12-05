@@ -4,9 +4,9 @@ public class Alignment {
 	
 	// --------------------- Atributes and relations --------------------- //
 	
-	private String date;
-	private int[][] formation;
-	private Tactic tactic;
+	private String date; // Date of (creation/use) of the alignment
+	private int[][] formation; // Binary matrix that represents with 0's and 1's the location of players on the field.
+	private Tactic tactic; // The tactic of the alignment
 	// ----------------------------------------------------------------------
 	
 	// --------------------- Constructor --------------------- //

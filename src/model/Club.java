@@ -5,17 +5,17 @@ import java.util.ArrayList;
 public class Club {
 	
 	// Atributes and relations --------- //
-	private String clubName;
-	private int nit;
-	private String foundationDate;
+	private String clubName; // The name of the club, applied in the constructor
+	private int nit; // The NIT of the club, applied in the constructor
+	private String foundationDate; // The foundation date of the club, applied in the constructor
 	// Teams ------------//
-	private Team teamA;
-	private Team teamB;
+	private Team teamA; // The Team A of the club
+	private Team teamB; // The Team B of the club
 	// Sectors ----------//
-	private Coach[][] officeSector;
-	private ArrayList<Employee> payroll;
-	private Player[][] dressingRoomA;
-	private Player[][] dressingRoomB;
+	private Coach[][] officeSector; // The office sector, in which we can put any class that inherits from Coach.
+	private ArrayList<Employee> payroll; // The Payroll, which is an ArrayList of Employees.
+	private Player[][] dressingRoomA; // The dressing room A, in which we can put any player that belongs to Team A
+	private Player[][] dressingRoomB; // The dressing room B, in which we can put any player that belongs to Team B
 	// ---------------------------------//
 	
 	// --------------------- Constructor --------------------- //
@@ -463,9 +463,9 @@ public class Club {
 
 	public void updateEmployee(String id, int wonChamp, int manager) {
 		MainCoach mockCoach = (MainCoach)payroll.get(searchEmployeeById(id));
-		if (wonChamp != 0) {
+		if (wonChamp != -1) {
 			mockCoach.setChampionships(wonChamp);
-		} else if (manager != 0) {
+		} else if (manager != -1) {
 			mockCoach.setManagerOfTeams(manager);
 		}
 	}
@@ -497,9 +497,9 @@ public class Club {
 	
 	public void updateEmployee(String id, int shirtNum, double averageRating, String position) {
 		Player mockPl = (Player)payroll.get(searchEmployeeById(id));
-		if (shirtNum != 0) {
+		if (shirtNum != -1) {
 			mockPl.setShirtNumber(shirtNum);
-		} else if (averageRating != 0) {
+		} else if (averageRating != -1) {
 			mockPl.setAverageRating(averageRating);
 		} else if (position != null) {
 			mockPl.setPosition(position);
