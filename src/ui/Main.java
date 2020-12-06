@@ -26,13 +26,6 @@ public class Main {
 	
 	// --------------------- Entry of the program --------------------- //
 	
-	/**
-	* It's the entry of the program.
-	* pre: <br>
-	* pos: <br>
-	*
-	*/
-	
 	public static void main(String args[]) {
 		Main ppal = new Main();
 		int opt = 0;
@@ -488,9 +481,9 @@ public class Main {
 	*FDEDFDHGFDHFDHMGNESDRJGNERJIKENDRBIKGBENDBFKBGFIKGBDFKGBFDGBDSKGKD
 	*/
 	
-	public void addAlignment() { // Should I also be able to print the formation??
+	public void addAlignment() { 
 		if (sapeClub != null) {
-			System.out.println("Which team do you want to add it to? 'A' or 'B'");  // There is an error that i cant get to notice
+			System.out.println("Which team do you want to add it to? 'A' or 'B'");
 			char team = in.nextLine().toUpperCase().charAt(0);
 			
 			System.out.println("Enter the date of this alignment");
@@ -526,7 +519,7 @@ public class Main {
 			String errorMessage = "";
 			String[] formationNums = formation.split("-");
 			if (formationNums.length <= 10) {
-				for (int i = 0; i < formationNums.length && !error; i++) { // TOO MANY CONDITIONALS
+				for (int i = 0; i < formationNums.length && !error; i++) {
 					if (Integer.parseInt(formationNums[i]) <= 7) {
 						sum += Integer.parseInt(formationNums[i]);
 					} else {
@@ -547,8 +540,6 @@ public class Main {
 					} else {
 						System.out.println("The entered team is not valid");
 					}
-				} else {
-					System.out.println("\nYou have introduced a wrong formation");
 				}
 				
 			} else {
@@ -713,7 +704,6 @@ public class Main {
 	* Prints the club with their atributes and information. <br>
 	* pre: The club must be defined. <br>
 	* pos: <br>
-	*
 	*/
 	
 	public void printClub() {

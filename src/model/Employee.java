@@ -13,10 +13,13 @@ public abstract class Employee {
 	// --------------------- Constructor --------------------- //
 	
 	/**
-	*
-	*
-	*
-	*
+	* Employee's constructor.
+	* pre: All the parameters must be defined.<br>
+	* pos: The values of the corresponding atributes are now the ones passed by the parameters.<br>
+	* @param name. Represents the name of the employee. <br>
+	* @param id. Represents the id of the employee. <br>
+	* @param salary. Represents the salary of the employee. <br>
+	* @param state. Represents the state of the employee.
 	*/
 	
 	public Employee(String name, String id, double salary, String state) {
@@ -64,10 +67,10 @@ public abstract class Employee {
 	// --------------------- Methods -------------------------------------- //
 	
 	/**
-	*
-	*
-	*
-	*
+	* Returns a String with the information of the employee. <br>
+	* pre: <br>
+	* pos: <br>
+	* @return out. A string that contains the atributes and information of the employee.
 	*/
 	
 	@Override

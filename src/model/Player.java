@@ -13,10 +13,17 @@ public class Player extends Employee implements Profitable {
 	// --------------------- Constructor --------------------- //
 	
 	/**
-	*
-	*
-	*
-	*
+	* Player's constructor.
+	* pre: All the parameters must be defined. <br>
+	* pos: The values of the corresponding atributes are now the ones passed by the parameters.<br>
+	* @param name. Represents the name of the player. <br>
+	* @param id. Represents the id of the player. <br>
+	* @param salary. Represents the salary of the player. <br>
+	* @param state. Represents the state of the player. <br>
+	* @param shirtNumber. Represents the shirt number of the player. <br>
+	* @param numberOfGoals. Represents the number of goals made so far by the player. <br>
+	* @param averageRating. Represents the actual average rating of the player. <br>
+	* @param position. Represents the position of the player.
 	*/
 	
 	public Player (String name, String id, double salary, String state, int shirtNumber, int numberOfGoals, double averageRating, String position) {
@@ -66,10 +73,10 @@ public class Player extends Employee implements Profitable {
 	// --------------------- Inherited methods from profitable interface --------------------- //
 	
 	/**
-	*
-	*
-	*
-	*
+	* Calculates and returns the market price of the player.
+	* pre: The position, averageRating, salary and numberOfGoals must be defined.<br>
+	* pos: <br>
+	* @return marketPrice. A double that represents the market price of the player.
 	*/
 	
 	public double calculateMarketPrice() {
@@ -88,10 +95,10 @@ public class Player extends Employee implements Profitable {
 	}
 	
 	/**
-	*
-	*
-	*
-	*
+	* Calculates and returns the star level of the player. 
+	* pre: The position, averageRating and numberOfGoals must be defined. <br>
+	* pos: <br>
+	* @return stars. A double that represents the star level of the player.
 	*/
 	
 	public double calculateStars() {
@@ -112,13 +119,13 @@ public class Player extends Employee implements Profitable {
 	// --------------------- Overrided methods --------------------- //
 	
 	/**
-	*
-	*
-	*
-	*
+	* Returns a String with all the information of the player.
+	* pre: <br>
+	* pos: <br>
+	* @return out. A string that contains the player's information.
 	*/
 	
-	@Override // I need to add to the toString methods the MarketPrice and the Stars
+	@Override
 	public String toString() {
 		String out = super.toString() + "Shirt number: " + shirtNumber + "\n" +
 		"Number of goals: " + numberOfGoals + "\n" +
