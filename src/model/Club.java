@@ -130,18 +130,16 @@ public class Club {
 		}
 	}
 
-	/*
-	TO MAKEEEEEEEEEEEEEEEEEEEEEEEEEE
-	*/
+	
 	/**
-	* I WILL DO THE ALIGNMENT LATER ON. ;)
-	*
-	*
-	* @param team.
-	* @param date.
-	* @param formation.
-	* @param tactic.
-	* @return result.
+	* Adds an alignment into the given team.
+	* pre: All the parameters must be defined.<br> 
+	* pos: A new alignment is added into the chosen team.<br> 
+	* @param team. Represents the team in which to add the alignment. <br>
+	* @param date. The date of the creation/use of the alignment <br>
+	* @param formation. Represents the numbers of the formation in an array. <br>
+	* @param tactic. Represents the tactic of the formatio.
+	* @return result. Message that describes whether the alignment addition was succesful or not.
 	*/
 
 	public String addAlignmentToTeam(char team, String date, String[] formation, String tactic) { 
@@ -180,6 +178,15 @@ public class Club {
 		
 		return result;
 	}
+	/**
+	* Fills the formation in the given row.
+	* pre: All the parameters must be defined and have a value to work<br>
+	* pos: Adds the neccessary 1's in the row of the formation<br>
+	* @param formMatrix. Is the matrix of the formation. <br>
+	* @param row. Represents the row to edit. <br>
+	* @param formation. Is the array with the numbers of the formation. <br>
+	* @param start. Represents in which index to start at the formation array. <br>
+	*/
 	
 	public void fillFormation(int[][] formMatrix, int row, String[] formation, int start) {
 		int i = 0;
